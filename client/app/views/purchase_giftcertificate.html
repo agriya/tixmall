@@ -1,0 +1,131 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 row">
+                <h3 class="text-uppercase mb25">{{'Purchase gift vouchers'|translate}}</h3>
+                <form class="form-horizontal form-alter" role="form" name="giftVoucher" ng-submit="purchasegift.addGiftToBasket()" novalidate>
+                    <div class="navbar-btn"></div>
+                    <h4 class="text-uppercase text-muted">{{'Amount'|translate}}</h4>
+                    <hr class="navbar-btn mb25">
+                    <div class="form-group well-sm">
+                        <div class="radio col-sm-6" ng-repeat="donation_amount in  purchasegift.donation_amounts"> <input type="radio" name="amount" class="col-sm-9" ng-value="{{donation_amount.amount}}" id="amount_{{donation_amount.id}}" ng-model="purchasegift.details.amount" ng-change="purchasegift.defaultAmount()"> <label class="row col-sm-5"
+                                for="amount_{{donation_amount.id}}">  
+                           <span class=""> {{formatCurrency(donation_amount.amount) | currency:selectedCurrency.currency_symbol : GeneralConfig.fraction}} <span class="text-danger">&nbsp;*</span></span>
+                        </label> </div>
+                        <div class="radio col-sm-6"> <input type="radio" name="amount" class="col-sm-9" ng-value="donation_amount.amount" ng-model="purchasegift.details.amount" id="ownAmount" ng-change="purchasegift.ownAmount()"> <label class="row col-sm-5" for="ownAmount">  
+                           <span class=""> {{'Or enter your own' | translate}}<span class="text-danger">&nbsp;*</span></span>
+                        </label> </div>
+                        <div class="well-sm clearfix"></div>
+                        <div class="col-sm-12"> <input type="text col-sm-6" class="form-control col-sm-6" ng-disabled="purchasegift.disable_enter_amount" ng-model="purchasegift.own_amount" id="amount" name="own_amount" min="5" ng-required="true">
+                            <div class="help-block text-danger"
+                                ng-if="(giftVoucher.own_amount.$dirty || giftVoucher.$submitted) && !purchasegift.disable_enter_amount" ng-messages="giftVoucher.own_amount.$error" role="alert">
+                                <div class="navbar-btn"></div>
+                                <div ng-message="required" class="text-danger">{{'Amount required'|translate}}.</div>
+                                <div ng-message="min" class="text-danger">{{'Amount should be more than '|translate}} {{formatCurrency(5) | currency:: selectedCurrency.currency_symbol : GeneralConfig.fraction}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-btn"></div>
+                    <h4 class="text-uppercase text-muted">{{'choose your voucher'|translate}}</h4>
+                    <hr class="navbar-btn mb25">
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="is_general1" class="control-label">{{'Birthday'|translate}}
+                    <span class="text-danger">&nbsp;*</span>
+                  </label> </div>
+                        <div class="col-sm-9"> <label>
+                    <input type="radio" ng-model="purchasegift.details.is_general" ng-value="false" name="is_general" id="is_general1">
+                  </label> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="is_general2" class="control-label">{{'General'|translate}}
+                    <span class="text-danger">&nbsp;*</span>
+                  </label> </div>
+                        <div class="col-sm-9"> <label>
+                    <input type="radio" ng-model="purchasegift.details.is_general" ng-value="true" name="is_general" class="" id="is_general2">
+                  </label> </div>
+                    </div>
+                    <div class="navbar-btn"></div>
+                    <h4 class="text-uppercase text-muted">{{'To whom would you like us to send the gift voucher?'|translate}}</h4>
+                    <hr class="navbar-btn mb25">
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="sent_to_me" class="control-label">Send to me</label> </div>
+                        <div class="col-sm-9"> <label> 
+                    <input type="radio" name="sent" ng-model="sent_to_me" value="true" id="sent_to_me" ng-checked="true">
+                  </label> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="sent_to_other" class="control-label">Send directly to gift recipient</label> </div>
+                        <div class="col-sm-9"> <label>
+                    <input type="radio" name="sent" ng-model="sent_to_me" value="false" id="sent_to_other" >
+                  </label> </div>
+                    </div>
+                    <div class="form-group" ng-show="sent_to_me == 'true' || sent_to_me === true" ng-class="{ 'has-error': giftVoucher.to_email.$dirty && giftVoucher.to_email.$invalid || (giftVoucher.$submitted && giftVoucher.to_email.$invalid) }">
+                        <div class="col-sm-3"> <label for="to_email" class="control-label">{{'Your Email Address'|translate}}</label> </div>
+                        <div class="col-sm-9"> <input type="email" class="form-control" id="to_email" name="to_email" placeholder="Email address" ng-model="purchasegift.details.to_email" ng-required="true">
+                            <div class="help-block text-danger" ng-if="giftVoucher.to_email.$dirty || giftVoucher.$submitted"
+                                ng-messages="giftVoucher.to_email.$error" role="alert">
+                                <div ng-message="required">{{'Email required'|translate}}.</div>
+                                <div ng-message="email">{{'Email must be a valid email address'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="sent_to_me == 'false' || sent_to_me === false" ng-class="{ 'has-error': giftVoucher.to_email.$dirty && giftVoucher.to_email.$invalid || (giftVoucher.$submitted && giftVoucher.to_email.$invalid) }">
+                        <div class="col-sm-3"> <label for="recepient_email" class="control-label">{{'Receipient\'s Email Address'|translate}}</label> </div>
+                        <div class="col-sm-9"> <input type="email" class="form-control" id="recepient_email" placeholder="Email address" ng-model="purchasegift.details.to_email" name="to_email" ng-required="true">
+                            <div class="help-block text-danger" ng-if="giftVoucher.to_email.$dirty || giftVoucher.$submitted"
+                                ng-messages="giftVoucher.to_email.$error" role="alert">
+                                <div ng-message="required">{{'Receipient\'s email required'|translate}}.</div>
+                                <div ng-message="email">{{'Receipient\'s Email must be a valid email address'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': giftVoucher.confirm_email.$dirty && giftVoucher.confirm_email.$invalid || (giftVoucher.$submitted && giftVoucher.confirm_email.$invalid) }">
+                        <div class="col-sm-3"> <label for="confirm_email" class="control-label">{{'Confirm Email Address'|translate}}</label> </div>
+                        <div class="col-sm-9"> <input type="email" class="form-control" ng-model="purchasegift.confirm_email" match="purchasegift.details.to_email" id="confirm_email" name="confirm_email" placeholder="Confirm email address" ng-required="true">
+                            <div class="help-block text-danger"
+                                ng-if="giftVoucher.confirm_email.$dirty || giftVoucher.$submitted" ng-messages="giftVoucher.confirm_email.$error" role="alert">
+                                <div ng-message="required">{{'Confirm email required'|translate}}.</div>
+                                <div ng-message="email">{{'Confirm email must be a valid email address'|translate}}.</div>
+                                <div ng-message="mismatch">{{'Email and confirm email must match'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-btn"></div>
+                    <h4 class="text-uppercase text-muted">{{'Enter a message to be included with your gift voucher'|translate}}</h4>
+                    <hr class="navbar-btn mb25">
+                    <div class="form-group" ng-class="{ 'has-error': giftVoucher.to_name.$dirty && giftVoucher.to_name.$invalid || (giftVoucher.$submitted && giftVoucher.to_name.$invalid) }">
+                        <div class="col-sm-3"> <label for="to_name" class="control-label">{{'To'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" class="form-control" id="to_name" name="to_name" ng-model="purchasegift.details.to_name" placeholder="To" ng-required="true">
+                            <div class="help-block text-danger" ng-if="giftVoucher.to_name.$dirty || giftVoucher.$submitted"
+                                ng-messages="giftVoucher.to_name.$error" role="alert">
+                                <div ng-message="required">{{'To name required'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': giftVoucher.from_name.$dirty && giftVoucher.from_name.$invalid || (giftVoucher.$submitted && giftVoucher.from_name.$invalid) }">
+                        <div class="col-sm-3"> <label for="from_name" class="control-label">{{'From'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" class="form-control" id="from_name" name="from_name" ng-model="purchasegift.details.from_name" ng-required="true" id="from" placeholder="From">
+                            <div class="help-block text-danger" ng-if="giftVoucher.from_name.$dirty || giftVoucher.$submitted"
+                                ng-messages="giftVoucher.from_name.$error" role="alert">
+                                <div ng-message="required">{{'From name required'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': giftVoucher.message.$dirty && giftVoucher.message.$invalid || (giftVoucher.$submitted && giftVoucher.message.$invalid) }">
+                        <div class="col-sm-3"> <label for="message" class="control-label">{{'Message'|translate}}</label> </div>
+                        <div class="col-sm-9"> <textarea type="text" class="form-control" id="message" name="message" ng-model="purchasegift.details.message" placeholder="Message" ng-maxlength="400"></textarea>
+                            <div class="text-right navbar-btn"> <span>(up to 400 characters max)</span> </div>
+                            <div class="help-block text-danger" ng-if="giftVoucher.message.$dirty || giftVoucher.$submitted" ng-messages="giftVoucher.message.$error" role="alert">
+                                <div ng-message="maxlength">{{'Message is too long'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group text-right">
+                        <div class="col-sm-offset-2 col-sm-10"> <button type="submit" class="btn text-uppercase btn-danger">{{'add to basket'|translate}}</button> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

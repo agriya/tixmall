@@ -1,0 +1,39 @@
+<div class="section pr">
+    <div class="cover-image fixed-banner" style="background-image : url('../images/login-bg.jpg')"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 fa-inverse login-border">
+                <div class="panel transparency col-md-6 col-xs-12 pull-right">
+                    <form class="well-lg" role="form" name="userLogin" ng-submit="save()" novalidate>
+                        <h2>{{'LOG IN'|translate}}</h2>
+                        <div class="form-group" ng-class="{ 'has-error': userLogin.username.$dirty && userLogin.username.$invalid || (userLogin.$submitted && userLogin.username.$invalid) }"> <label for="username" class="control-label">{{label}}</label> <input type="text" ng-model="loginController.user.username" class="form-control" name="username" id="username" placeholder="{{placeholder}}" ng-required="true">
+                            <div
+                                class="help-block text-danger" ng-if="userLogin.username.$dirty || userLogin.$submitted" ng-messages="userLogin.username.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="radio"> <label><input type="radio" name="register" ng-model="already_register" value="false">{{'No, I\'ve not registered before'|translate}}</label> </div>
+                    <div class="radio"> <label><input type="radio" name="register" ng-model="already_register" value="true">{{'Yes, I have a password'|translate}}</label> </div>
+                </div>
+                <div ng-show="already_register == 'true'">
+                    <div class="form-group" ng-class="{ 'has-error': userLogin.password.$dirty && userLogin.password.$invalid || (userLogin.$submitted && userLogin.password.$invalid) }"> <label for="password" class="control-label">{{'Password'|translate}}:</label> <input type="password" ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()" ng-model="loginController.user.password"
+                            class="form-control" name="password" id="password" placeholder="{{'Password'|translate}}" ng-required="true">
+                        <div class="help-block text-danger" ng-if="userLogin.password.$dirty || userLogin.$submitted" ng-messages="userLogin.password.$error"
+                            role="alert">
+                            <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group"> <a href="#!/users/forgot_password">{{'Forgotten your password?'|translate}}</a> </div>
+                    <div class="form-group text-right"> <button type="submit" ng-show="save_btn" class="btn btn-danger disabled">{{'Log in'|translate}}</button> <button type="submit" ng-show="!save_btn" class="btn btn-danger">{{'Log in'|translate}}</button> </div>
+                </div>
+                <div ng-show="already_register == 'false'">
+                    <div class="form-group text-right"> <a class="btn btn-danger" href="#!/users/register">{{'Register'|translate}}</a> </div>
+                </div>
+                <!-- <a ng-repeat="provider in providers" data-provider="{{provider.name}}" ng-click="authenticate(provider.slug)"> <i class="fa {{provider.icon_class}}">{{provider.name}}</i> </a>--></form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

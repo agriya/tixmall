@@ -1,0 +1,92 @@
+<div class="container-max">
+    <section id="banner-carousel" class="slider carousel-event">
+        <uib-carousel active="active">
+            <div ng-show="!event_image_loaded" class="text-center">
+                <div class="well-lg"></div>
+                <div class="well-lg"></div>
+                <div class="well-lg"></div>
+                <div class="well-lg"></div>
+                <div class="well-lg hidden-xs"></div>
+                <div class="well-lg hidden-xs"></div>
+                <div class="well-lg hidden-xs"></div> <i class="fa fa-spinner fa-inverse fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
+                <div class="well-lg"></div>
+                <div class="well-lg"></div>
+                <div class="well-lg"></div>
+                <div class="well-lg"></div>
+                <div class="well-lg hidden-xs"></div>
+                <div class="well-lg hidden-xs"></div>
+                <div class="well-lg hidden-xs"></div>
+            </div>
+            <uib-slide>
+                <!--<img ng-src="{{model.eventDetails.image_name}}" class="img-responsive center-block" ng-show="event_image_loaded" />--><img ng-show="model.eventDetails.video_name === undefined" ng-src="{{model.eventDetails.image_name}}" class="img-responsive center-block" ng-show="event_image_loaded" /> <video id="video" ng-show="model.eventDetails.video_name !== undefined"
+                    ng-src="{{model.eventDetails.video_name}}" controls="true" ng-click="model.playorpause()"></video>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <!-- <div class="row">
+                            <div class="main-banner col-md-12 text-left fa-inverse text-shadow">
+                                <a class="text-decoration-none" href="#!/venue/{{model.eventDetails.venue.id}}/{{model.eventDetails.venue.slug}}"> <span class="font16">{{model.eventDetails.venue.name}}</span> </a><a class="text-decoration-none" href="#!/event/{{model.eventDetails.id}}/{{model.eventDetails.slug}}"><h1 class="text-inverse list-group-item-heading">
+                                                <b>{{model.eventDetails.name}}</b>
+                                            </h1></a>
+                                <ul class="list-unstyled">
+                                    <li> <span class="margin-left-5">{{model.eventDetails.category.name}} </span> </li>
+                                    <li> <a class="text-decoration-none" href="#!/eventschedule/{{model.eventDetails.id}}/{{model.eventDetails.slug}}"><span><img src="../images/banner-icon-1-calendar.png" class="fa-fw"></span><span class="margin-left-5">{{model.eventDetails.event_schedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{model.eventDetails.event_schedule[0].end_date |moment:'dddd, DD.MMM.YY'}} </span>  </a>                                        </li>
+                                    <li> <span><img src="../images/banner-icon-2-map.png" class="fa-fw"></span> <span class="margin-left-5">{{model.eventDetails.venue.address1}}</span> </li>
+                                    <li ng-show="model.eventDetails.is_free_event !== true"> <span><img src="../images/banner-icon-3-dollar.png" class="fa-fw"> </span> <span class="margin-left-5">{{'Tickets Starting From AED 250'|translate}}</span> </li>
+                                </ul> <br> <a class="btn btn-danger btn-lg no-border-rad view-more-btn" href="#!/events/{{model.eventDetails.id}}/{{model.eventDetails.venue.id}}/choose-tickets/{{model.eventDetails.event_schedule[0].id}}" ng-show="model.eventDetails.event_schedule.length == 1 || model.eventDetails.venue.is_seat_map == 0">{{'BOOK NOW'|translate}}</a>                                <a class="btn btn-danger btn-lg no-border-rad view-more-btn" href="#!/production/{{model.eventDetails.id}}/{{model.eventDetails.venue.id}}" ng-show="model.eventDetails.event_schedule.length > 1 && model.eventDetails.venue.is_seat_map == 1">{{'BOOK NOW'|translate}}</a>                                </div>
+                        </div>
+                    </div>--></div>
+            </uib-slide>
+        </uib-carousel>
+    </section>
+    </div>
+    <div class="section custom-section-padding">
+        <div class="container">
+            <div class="event-menu">
+                <div class="col-sm-4"> </div>
+                <div class="col-sm-4 text-center mt5"> <a href="#"><img src="../images/logo.png" class="mbot20 mt5" style="max-width:40%;"></a> </div>
+                <div class="col-sm-4 text-right mob-center"> <a href="#!/events/{{model.eventDetails.id}}/{{model.eventDetails.venue.id}}/choose-tickets/{{model.eventDetails.event_schedule[0].id}}" ng-show="model.eventDetails.event_schedule.length == 1" class="btn btn-danger btn-lg mbot20">Tickets from {{model.eventDetails.min_event_price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}} &nbsp; <i class="fa fa-lg fa-angle-right icon-ver"></i> </a>                    <a href="#!/eventschedule/{{model.eventDetails.id}}/{{model.eventDetails.slug}}" ng-show="model.eventDetails.event_schedule.length > 1" class="btn btn-danger btn-lg mbot20">Tickets from {{model.eventDetails.min_event_price| currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}} &nbsp; <i class="fa fa-lg fa-angle-right icon-ver"></i> </a>                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="main-tab">
+            <div class="container fa-inverse">
+                <div class="row">
+                    <div class="col-md-12">
+                        <uib-tabset active="active">
+                            <uib-tab heading="About the Show">
+                                <div class="row">
+                                    <div class="col-md-12 mt25">
+                                        <p ng-bind-html="model.eventDetails.description"></p>
+                                    </div>
+                                </div>
+                            </uib-tab>
+                            <uib-tab heading="Terms & Conditions">
+                                <div class="row">
+                                    <div class="col-md-12 mt25">
+                                        <p ng-bind-html="model.eventDetails.terms_and_conditions"></p>
+                                    </div>
+                                </div>
+                            </uib-tab>
+                            <uib-tab heading="Floorplan & Schedule">
+                                <div class="row">
+                                    <div class="col-md-12 mt25"> <img ng-src="{{model.eventDetails.floor_plan_image_name}}" class="img-responsive"> </div>
+                                </div>
+                            </uib-tab>
+                            <uib-tab heading="Ticket Prices">
+                                <div class="row">
+                                    <div class="col-md-12 mt25"> <img ng-src="{{model.eventDetails.ticket_prices_image_name}}" class="img-responsive"> </div>
+                                </div>
+                            </uib-tab>
+                        </uib-tabset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section custom-section latest-news">
+            <div class="container">
+                <div class="row">
+                    <h3 class="fa-inverse">{{'LATEST NEWS'|translate}}</h3>
+                    <latest-news></latest-news>
+                </div>
+            </div>

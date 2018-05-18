@@ -1,0 +1,51 @@
+<div class="container-max">
+    <div id="mycarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="item active"> <img ng-src="{{image_name}}" class="img-responsive" />
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row text-left">
+                            <h2>{{model.newsview.title}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fa-inverse">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="">
+                        <div class="container">
+                            <div class="row mt25">
+                                <div class="col-md-8">
+                                    <p ng-bind-html="model.newsview.description" class="mt25"></p> <br>
+                                    <div class="well no-border-rad">
+                                        <h2>{{'Tip Top'|translate}}:</h2>
+                                        <p>{{'Our Box Office staff will know which seats offer the best view and will be able to recommend you what they consider to be the best available seat'|translate}}</p>
+                                    </div> <a class="btn btn-danger pull-left mbot20" href="#!/news/{{model.previousNews.id}}/{{model.previousNews.slug}}" ng-show="model.previousNews.id">{{'Previous Article'|translate}}</a> <a class="btn btn-danger pull-right mbot20"
+                                        href="#!/news/{{model.nextNews.id}}/{{model.nextNews.slug}}" ng-show="model.nextNews.id">{{'Next Article'|translate}}</a>
+                                    <div class="well-sm clearfix"></div>
+                                </div>
+                                <div class="col-md-4 clrBoth">
+                                    <h3 class="text-danger text-uppercase">{{'Related News'|translate}}</h3>
+                                    <hr>
+                                    <ul class="media-list">
+                                        <li class="media" ng-repeat="related in model.relatedNews" ng-class="{'sep-bot':!$last}"> <a class="pull-left" href="#!/news/{{related.id}}/{{related.slug}}"><img class="media-object" ng-src="{{related.image_name}}" height="64" width="64"></a>
+                                            <div class="media-body">
+                                                <a href="#!/news/{{related.id}}/{{related.slug}}">
+                                                    <h4 class="media-heading">{{related.title}}</h4>
+                                                </a>
+                                                <p class="htruncate-m2">{{related.description | htmlToPlaintext}}</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

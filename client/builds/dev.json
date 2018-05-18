@@ -1,0 +1,9 @@
+{
+	"db_user": "DB-USER",
+	"db_password": "DB-PASSWORD",
+	"db_name": "DB-TIXMALL",
+	"sftp_upload_path": "SFTP-UPLOAD-PATH",
+	"sftp_host": "SFTP-HOST",
+	"sftp_username": "SFTP-USERNAME",
+	"sftp_password": "SFTP-PASSWORD"
+}

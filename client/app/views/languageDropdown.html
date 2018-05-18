@@ -1,0 +1,4 @@
+<a class="h6 list-group-item-heading list-group-item-text show dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1"> <i class="fa fa-globe"></i>&nbsp;{{currentLocaleDisplayName ? currentLocaleDisplayName : localesDisplayNames[1]}} <span class="fa fa-chevron-down"></span> </a>
+<ul class="dropdown-menu space-top-0 space-btom-0" aria-labelledby="dropdownMenu1">
+    <li class="h6" ng-repeat="language in localesDisplayNames | orderBy:'':true"><a ng-click="changeLanguage(language)">{{language}}</a></li>
+</ul>

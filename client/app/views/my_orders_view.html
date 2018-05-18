@@ -1,0 +1,62 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 navbar-btn myorders">
+                <div class="row pspace9">
+                    <h2 class="mb25 text-uppercase">{{'My orders'|translate}}</h2>
+                    <div class="clearfix">
+                        <div class="thumbnail transparency clearfix no-space">
+                            <div class="col-sm-12 no-space" ng-repeat="order_item in myordersview.order_details.order_items">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        <h4 class="pleft20"> {{order_item.events.name}} </h4>
+                                        <p class="h5 pleft20"><b>{{order_item.events.event_schedule[0].start_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</b></p>
+                                    </div>
+                                    <div class="pull-right">
+                                        <p class="h5 mr25">{{formatCurrency(order_item.price) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                                    </div>
+                                </div>
+                                <div class="pleft20">
+                                    <h6><b>{{order_item.venue_zone_section_seats.venue_zone.name}}&nbsp;{{order_item.venue_zone_section_seats.venue_zone_section.name}} -<span> Row {{order_item.venue_zone_section_seats.venue_zone_row.name}}, Seat{{order_item.venue_zone_section_seats.seat_number}}</span></b></h6>
+                                    <div class="h6"> <b>Quantity:</b> <span>{{1}}x {{order_item.price_type.name}}</span> </div>
+                                    <div class="h6"> <b>Price:</b> <span>&nbsp; {{formatCurrency(order_item.price) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>
+                                        <my-modal body="In order to cover the total cost of providing our Box Office Service we charge a Payment Handling Fee which is 2% of the total transaction value and a Transaction Processing Fee of £2.50 per ticket. For the {{order_item.events.name}} the transaction processing fee is £2.00 per ticket (except Advance Sale Promming tickets where it is £1.00 per ticket), up to a maximum of £25.00. Please note that different charges may apply when booking hospitality and some other events."
+                                            name="Include Fees"> <span class="text-danger">{{'Including fees'|translate}}</span></my-modal>
+                                    </div>
+                                    <div class="h6"> <b>Delivery Method:</b> <span>&nbsp; Print at Home</span> </div> <br>
+                                    <h6><b>Ticket information (applies to one or more of your tickets)</b></h6>
+                                    <h6>Restricted Viewing</h6><br> </div>
+                            </div>
+                            <!--  <div class="well-sm clearfix pull-left mb25 pleft20">
+                                    <a href="#" class="btn custom-section text-uppercase btn-sm pull-left mright mbot20">Add a Restaurant Reservation.</a>
+									<a href="#" class="btn custom-section text-uppercase btn-sm pull-left mright mbot20">Add Parking (at Imperial College Car Park)</a>
+									<a href="#" class="btn custom-section text-uppercase btn-sm pull-left mright mbot20">Add a Tour of the Hall</a>
+                                </div>-->
+                            <div class="bg-danger clrBoth pleft20" style="clear:both;">
+                                <p class="h5 order-space"><b>Payments</b></p>
+                            </div>
+                            <div class="clearfix">
+                                <div class="pull-left">
+                                    <h5 class="pleft20"> {{myordersview.order_details.credit_card.card_type}} </h5>
+                                </div>
+                                <div class="pull-right">
+                                    <p class="h5 mr25">{{formatCurrency(myordersview.order_details.total_amount) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                                </div>
+                            </div>
+                            <div class="bg-danger clrBoth pleft20 over-hide">
+                                <p class="h5 order-space pull-left"><b>Order Total</b></p>
+                                <p class="h5 mr25 pull-right order-space">{{formatCurrency(myordersview.order_details.total_amount) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> <a href="#!/accounts/pastorders" class="btn custom-section text-uppercase btn-sm">GO BACK TO LIST</a> </div> <br>
+                    <div class="clearfix"> <a href="" ng-click="myordersview.resendTicket()" class="btn custom-section text-uppercase btn-sm">RE-PRINT THIS ORDER</a> </div><br>
+                    <div class="clearfix"> <a href="{{myordersview.order_details.download_url}}" class="btn custom-section text-uppercase btn-sm">Download e-tickets</a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

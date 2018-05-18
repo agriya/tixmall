@@ -1,0 +1,8 @@
+<ul class="nav nav-pills nav-stacked mt25 mb15 myacc-block">
+    <li role="presentation" ng-class="{'active': ($state.current.name === 'users_settings')}"><a href="#!/users/settings">{{'My Details'|translate}}</a></li>
+    <li role="presentation" ng-class="{'active': ($state.current.name === 'users_change_password')}"><a href="#!/users/change_password">{{'Change Password'|translate}}</a></li>
+    <li role="presentation" ng-class="{'active': ($state.current.name === 'my_orders' || $state.current.name === 'my_orders_view')}"><a href="#!/accounts/pastorders">{{'My Orders'|translate}}</a></li>
+    <li role="presentation" ng-class="{'active': ($state.current.name === 'check_gift_vouchers')}"><a href="#!/account/checkgiftcertificate">{{'Gift Vouchers'|translate}}</a></li>
+    <li role="presentation" ng-class="{'active': ($state.current.name === 'saved_credit_cards')}"><a href="#!/accounts/cards">{{'Managed Saved Cards'|translate}}</a></li>
+    <li role="presentation" ng-class="{'active': ($state.current.name === 'users_logout')}"><a href="#!/users/logout">{{'Log out'|translate}}</a></li>
+</ul>

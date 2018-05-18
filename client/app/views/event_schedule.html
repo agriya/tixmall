@@ -1,0 +1,83 @@
+<div class="section pr fixed-banner">
+    <div class="cover-image" style="background-image : url('../images/login-bg.jpg')"></div>
+    <div class="container">
+        <div class="row"></div>
+    </div>
+</div>
+<div class="section p-b-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <div class="col-sm-3"> <a href="#!/event/{{event.eventDetails.id}}/{{event.eventDetails.slug}}"> <img ng-src="{{event.eventDetails.image_name}}" class="center-block img-responsive" alt="[Image: Vareka-light]" title="Vareka-light" /></a> </div>
+                <div class="col-sm-9 fa-inverse">
+                <span class="font16">{{event.eventDetails.venue.name}}</span>
+                    <a href="#!/event/{{event.eventDetails.id}}/{{event.eventDetails.slug}}">
+                        <h3 class="list-group-item-heading"> <b>{{event.eventDetails.name}}</b> </h3>
+                    </a>
+                    <ul class="list-unstyled">
+                        <li class="list-group-item-heading"> <span>{{event.eventDetails.category.name}} </span></li>
+                        <li> <span class="pull-left">
+                                         <a href="#!/event/{{event.eventDetails.id}}/{{event.eventDetails.slug}}"><img class="fa-fw" src="../images/banner-icon-1-calendar.png"></a>
+                                    </span>
+                            <p class="list-group-item-heading">&nbsp; {{event.eventDetails.event_schedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{event.eventDetails.event_schedule[0].end_date |moment:'dddd, DD.MMM.YY'}}</p>
+                        </li>
+                        <li> <span class="pull-left">
+                                        <img src="../images/banner-icon-2-map.png" class="fa-fw" alt="[Image: Banner-icon-map]" title="Banner-icon-map">
+                                    </span>
+                            <p class="list-group-item-heading">&nbsp; {{event.eventDetails.venue.address1}}</p>
+                        </li>
+                        <li> <span class="pull-left">
+                                        <img src="../images/banner-icon-3-dollar.png" class="fa-fw" alt="[Image: Banner-icon-dollar]" title="Banner-icon-dollar">
+                                    </span>
+                            <p class="list-group-item-heading">&nbsp; Tickets Starting From {{event.eventDetails.min_event_price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr> </div>
+</div>
+<div class="section p-t-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 event-view-calendar">
+                <calendar type="event" refresh-events="event.refreshEvents(dateFilter)"></calendar>
+            </div>
+            <div class="col-md-8 fa-inverse">
+                <h4 class="list-group-item-text text-uppercase">{{dateFilter |moment:'dddd'}}</h4>
+                <h3 class="list-group-item-heading"> <b class="text-uppercase">{{dateFilter |moment:'DD.MMM.YY'}}</b> </h3>
+                <div class="clearfix scroll-block">
+                    <div class="col-md-6 no-space" ng-repeat="eventlist in event.eventlists" ng-show="event.eventlists.length > 0">
+                        <div class="col-md-5 no-space"> <a href="#!/event/{{event.eventDetails.id}}/{{event.eventDetails.slug}}"><img ng-src="{{event.eventDetails.image_name}}" class="center-block img-responsive" alt="{{event.eventDetails.name}}" title="{{event.eventDetails.name}}"></a>                            </div>
+                        <div class="col-md-7">
+                            <a href="#!/event/{{event.eventDetails.id}}/{{event.eventDetails.slug}}">
+                                <h4 class="list-group-item-heading"> <b title="{{event.eventDetails.name}}">{{event.eventDetails.name | limitTo:20 }}...</b> </h4>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li> <span class="pull-left">
+                                                    <img src="../images/banner-icon-2-map.png" class="fa-fw" alt="[Image: Banner-icon-map]" title="Banner-icon-map">
+                                                </span>
+                                    <p class="list-group-item-heading">&nbsp; {{event.eventDetails.venue.address1}}</p>
+                                </li>
+                                <li> <span class="pull-left">
+                                                    <img src="../images/icon-clock.png" class="fa-fw" alt="[Image: Banner-icon-clock]" title="Banner-icon-clock">
+                                                </span>
+                                    <p class="list-group-item-heading">&nbsp;{{eventlist.start_date | moment:'h:m A'}}</p>
+                                </li>
+                                <li> <a href="#!/events/{{event.eventDetails.id}}/{{event.eventDetails.venue.id}}/choose-tickets/{{eventlist.id}}" class="btn btn-danger btn-block btn-lg no-border-rad">{{'BOOK NOW'|translate}}</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center" ng-show="event.eventlists.length === 0">
+                        <div class="well-lg">
+                            <div class="well-sm"></div>
+                            <h3 class="text-danger"> {{'No events found'|translate}}</h3>
+                            <div class="well-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

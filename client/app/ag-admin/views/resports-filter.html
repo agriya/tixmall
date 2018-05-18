@@ -1,0 +1,66 @@
+<h4 class="sep-border text-uppercase">Filter options</h4>
+<uib-accordion>
+    <uib-accordion-group is-open="status.isOpen">
+        <uib-accordion-heading>
+            <div ng-class="{'sep-border-dashed': status.isOpen === false && appliedFilter && !equals({}, filterForm)}"> Please click here to open filter options.<span class='pull-right fa' ng-class="{'fa fa-plus': !status.isOpen, 'fa fa-close': status.isOpen}"></span></div>
+            <div class="text-decoration-none" ng-if="status.isOpen === false && appliedFilter">
+                <p ng-show="filterForm.selected_event.name" class="navbar-btn"><i class="fa fa-filter"></i> <strong>Event :</strong> {{filterForm.selected_event.name}}</p>
+                <p ng-show="filterForm.selected_schedule" class="navbar-btn"><i class="fa fa-filter"></i> <strong>Event Date :</strong> {{filterForm.selected_schedule.start_date | date}}</p>
+                <p ng-show="filterForm.selected_pricetype" class="navbar-btn"><i class="fa fa-filter"></i> <strong>Ticket Type :</strong> {{filterForm.selected_pricetype.name}}</p>
+                <p ng-show="filterForm.selected_sales_channel" class="navbar-btn"><i class="fa fa-filter"></i> <strong>Sales Channel :</strong> {{filterForm.selected_sales_channel}}</p>
+                <p ng-show="filterForm.booked_start_date" class="navbar-btn"><i class="fa fa-filter"></i> <strong>Start Date :</strong> {{filterForm.booked_start_date | date}}</p>
+                <p ng-show="filterForm.booked_end_date" class="navbar-btn"><i class="fa fa-filter"></i> <strong>End Date :</strong> {{filterForm.booked_end_date | date}}</p>
+            </div>
+        </uib-accordion-heading>
+        <form class="form-horizontal sales-report-filter">
+            <div class="form-group"> <label for="event_name" class="col-sm-2 control-label">Event &nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="selected_event" id="event_name" ng-model="filterForm.selected_event" ng-options="allEvent as allEvent.name for allEvent in allEvents" ng-change="eventChange(filterForm.selected_event)">
+                            <option value="">All Events</option>
+                         </select> </div>
+            </div>
+            <div class="form-group" ng-hide="type === 'visitors'"> <label for="selected_schedule" class="col-sm-2 control-label">Event Date&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select ng-disabled="dateDidabled" class="form-control" name="selected_schedule" id="selected_schedule" ng-model="filterForm.selected_schedule" ng-options="eventSchedule as (eventSchedule.start_date|date) for eventSchedule in eventSchedules">
+                            <option value="">All Dates</option>
+                         </select> </div>
+            </div>
+            <div class="form-group" ng-hide="type === 'capacity' || type === 'visitors'"> <label for="selected_pricetype" class="col-sm-2 control-label">Ticket Type&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="selected_pricetype" id="selected_pricetype" ng-model="filterForm.selected_pricetype" ng-options="priceType as priceType.name for priceType in priceTypes">
+                            <option value="">All Tickets</option>
+                         </select> </div>
+            </div>
+            <div class="form-group" ng-hide="type === 'capacity' || type === 'visitors' || type === 'participants'"> <label for="sales_ch" class="col-sm-2 control-label">Sales Channel&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="selected_sales_channel" ng-model="filterForm.selected_sales_channel" id="sales_ch">
+                            <option value="">All Sales Channel</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="web">Web</option>
+                         </select> </div>
+            </div>
+            <div class="form-group" ng-hide="type === 'capacity' || type === 'participants'"> <label for="date_range" class="col-sm-2 control-label">Date Range&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7 row">{{date_range_start}}
+                    <div class="col-sm-6">
+                        <p class="input-group"> <input placeholder="start date" class="form-control" id="booked_start_date" name="booked_start_date" id="date_range" datetime-picker="MM/dd/yyyy" ng-model="filterForm.booked_start_date" is-open="calendar.date_range_start" enable-time="false"
+                                datepicker-options="datepicker.datepickerOptions" close-on-date-selection="false" datepicker-append-to-body="true" /> <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'date_range_start')"><i class="fa fa-calendar"></i></button>
+                                </span> </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="input-group"> <input placeholder="end date" class="form-control" name="booked_end_date" id="date_range" datetime-picker="MM/dd/yyyy" ng-model="filterForm.booked_end_date" is-open="calendar.date_range_end" enable-time="false" datepicker-options="datepicker.datepickerOptions"
+                                close-on-date-selection="false" datepicker-append-to-body="true" /> <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'date_range_end')"><i class="fa fa-calendar"></i></button>
+                                </span> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="type === 'participants'"> <label for="view" class="col-sm-2 control-label">View&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="selected_view" ng-model="filterForm.selected_view" id="selected_view">
+                            <option value="">All Options</option>
+                            <option value="invitation">Only Invitation</option>
+                            <option value="sold">Only Ticket Sold</option>
+                         </select> </div>
+            </div>
+            <div class="form-group"> <label for="date_range" class="col-sm-2 control-label">&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7 "> <span class="edit-button"> <button type="button" ng-click="applyFilter()" class="btn btn-default">Apply Filtering&nbsp;<i class="fa fa-filter" aria-hidden="true"></i></button></span> </div>
+            </div>
+        </form>
+    </uib-accordion-group>
+</uib-accordion>

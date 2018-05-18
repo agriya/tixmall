@@ -1,0 +1,122 @@
+<div id="container" class="sales-report">
+    <reports-filter callback="demographics_reports.refreshFilters(filter)" type="demograpics"></reports-filter>
+    <div class="report_details" ng-show="(demographics_reports.report_details.ages.length > 0 || demographics_reports.report_details.genders.length > 0 || demographics_reports.report_details.occupations.length > 0 || demographics_reports.report_details.educations.length > 0) && !demographics_reports.loading">
+        <div class="row">
+            <h4 class="text-uppercase col-xs-12">DUMAN DEMOGRAPHIC REPORTS</h4>
+            <div class="col-sm-6 text-center">
+                <h4>AGES</h4>
+                <table id="ageReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="age in demographics_reports.agedeatils">{{age.age}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td ng-repeat="age in demographics_reports.agedeatils">{{age.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h4>GENDER</h4>
+                <table id="genderReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>MALE</th>
+                            <th>FEMALE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td ng-repeat="gender in demographics_reports.genderdeatils">{{gender.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>DAILY SALES REPORT</h4>
+                <table id="dayReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="daily_sales in demographics_reports.group_daily_sales">{{daily_sales.day}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>All Events</th>
+                            <td ng-repeat="daily_sales in demographics_reports.group_daily_sales">{{daily_sales.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <h4>OCCUPATION</h4>
+                <table id="occupationReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="occupation in demographics_reports.customized_occupation_details">{{occupation.occupation}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td ng-repeat="occupation in demographics_reports.customized_occupation_details">{{occupation.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h4>EDUCATION</h4>
+                <table id="educationReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="education in demographics_reports.customized_education_details">{{education.education}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td ng-repeat="education in demographics_reports.customized_education_details">{{education.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>HOURLY SALES REPORT</h4>
+                <table id="hourReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="hourly_sales in demographics_reports.group_hourly_sales">{{hourly_sales.hour}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>All Events</th>
+                            <td ng-repeat="hourly_sales in demographics_reports.group_hourly_sales">{{hourly_sales.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div ng-show="demographics_reports.report_details.length == 0 && !demographics_reports.loading">
+        <div class="alert alert-info"> <strong>Notification!</strong> <br> No sales recorded under this criteria. the graphics will be visible after the first sold ticket. </div>
+        <div class="well-sm"></div>
+        <p class="text-muted">* In order to view the reports of your invitation-only events, please use the filtering options. Invitation data will not be added to the reports that are generated without selecting an event first.</p>
+    </div>
+</div>

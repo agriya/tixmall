@@ -1,0 +1,9 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+/app/images/*_thumb
+/app/images/VenueZoneSVG
+/app/images/VenueSVG
+/app/images/original

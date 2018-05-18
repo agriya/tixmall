@@ -1,0 +1,68 @@
+<div class="clearfix" ng-if="type === 'venue'" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
+    <div class="pr" ng-repeat="venue in venues" class="venue_img_container"> <a href="#!/venue/{{venue.id}}/{{venue.slug}}">
+          <img ng-src="{{venue.image_name}}" class="center-block img-responsive venue-hover-content-img">
+            <div class="hnowdtls">
+                <h2>{{venue.name}}</h2>
+                <div class="">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>{{venue.address1}}
+                </div>
+            </div>
+        </a> </div>
+    <!--<ol class="list-inline text-center thumbnail no-border well-sm clearfix" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
+        <li ng-repeat="venue in venues" class="venue_img_container">
+            <a href="#!/venue/{{venue.id}}/{{venue.slug}}" class="full-width home-page-img" ng-if="venue.is_seat_map == '0'"> <img ng-src="{{venue.image_name}}" class="center-block img-responsive navbar-btn  list-group-item-text venue-hover-content-img">
+                <div class="venue-hover-content well-lg">
+                    <h3 class="text-inverse list-group-item-heading text-uppercase htruncate-m3"><b>{{venue.name}}</b></h3>
+                </div>
+                <div class="venue-information well-lg">
+                    <h3 class="text-inverse list-group-item-heading text-uppercase htruncate-m3"><b>{{venue.name}}</b></h3>
+                </div>
+            </a>
+        </li>
+    </ol>-->
+</div>
+<!--<ol class="list-inline text-center thumbnail no-border well-sm clearfix">
+        <li> <img ng-src="{{venue.image_name}}" class="center-block img-responsive navbar-btn list-group-item-text" ng-repeat="venue in venues"> </li>
+    </ol>-->
+<!--<div class="clearfix" ng-scrollbars ng-scrollbars-config="scrollbarConfig" ng-if="type === 'eventAndVenue'">
+    <ol class="list-inline text-center thumbnail no-border clearfix well-sm event-venue-list">
+        <li class="col-sm-6" ng-repeat="eventsAndVenue in eventsAndVenues">
+            <a href="#!/event/{{eventsAndVenue.id}}/{{eventsAndVenue.slug}}"><img ng-src="{{eventsAndVenue.image_name}}" class="center-block img-responsive navbar-btn"> </a>
+        </li>
+    </ol>
+</div>-->
+<div class="hlatestevents" ng-if="type === 'eventAndVenue'">
+    <h3 class="htitleblk">Latest Events</h3>
+    <div class="">
+        <div class="hlisteveinner">
+            <div class="heventdly pr" ng-repeat="eventsAndVenue in eventsAndVenues[0].FirstBlockEvents"> <a href="#!/event/{{eventsAndVenue.id}}/{{eventsAndVenue.slug}}">
+                    <img ng-src="{{eventsAndVenue.image_name}}" />
+                    <div class="heventsdtls">
+                        <h2 class="htruncate-m2 text-uppercase">{{eventsAndVenue.name}}</h2>
+                    </div>
+                </a> </div>
+        </div>
+        <div class="hlisteveinner">
+            <div class="heventdly pr" ng-repeat="eventsAndVenue in eventsAndVenues[0].SecondBlockEvents"> <a href="#!/event/{{eventsAndVenue.id}}/{{eventsAndVenue.slug}}">
+                    <img ng-src="{{eventsAndVenue.image_name}}" />
+                    <div class="heventsdtls">
+                        <h2 class="htruncate-m2 text-uppercase">{{eventsAndVenue.name}}</h2>
+                    </div>
+                </a> </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="clearfix hotEvents" ng-if="type === 'hotEvents'" ng-scrollbars ng-scrollbars-config="scrollbarConfig">
+    <div class="clearfix thumbnail no-border-rad no-border list-group-item-text no-border initialism" ng-repeat="eventsAndVenue in eventsAndVenues">
+        <div class="col-md-4 col-sm-5">
+            <h6 class="fa-inverse htruncate-m1">2015-2016</h6>
+            <h6 class="fa-inverse list-group-item-heading htruncate-m1">{{eventsAndVenue.series.name}}</h6>
+        </div>
+        <div class="col-md-8  col-sm-7">
+            <a href="#!/event/{{eventsAndVenue.id}}/{{eventsAndVenue.slug}}">
+                <h6 class="fa-inverse htruncate-m1">{{eventsAndVenue.name}}</h6>
+            </a> <span class="text-muted sub-location htruncate-m1"><i class="fa fa-map-marker fa-fw"></i>{{eventsAndVenue.venue.name}}</span> </div>
+    </div>
+</div>

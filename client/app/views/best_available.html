@@ -1,0 +1,115 @@
+<div class="section pr fixed-banner">
+    <div class="cover-image" style="background-image : url('../images/login-bg.jpg')"></div>
+</div>
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row pspace9">
+            <div class="clearfix text-center">
+                <ul class="breadcrumb list-group-item-text">
+                    <li class="active"> <strong>{{'CHOOSE TICKET'|translate}}</strong> </li>
+                    <li class=""> <span>{{'YOUR BASKET'|translate}}</span> </li>
+                    <li class=""> <span>{{'DELIVERY METHOD'|translate}}</span> </li>
+                    <li class=""> <span>{{'PAYMENT'|translate}}</spana> </li>                     <li class=""> <span>{{'CONFIRMATION'|translate}}</span> </li>
+                </ul>
+            </div>
+            <div>
+                <div class="clearfix">
+                    <!--<h3 class="list-group-item-text text-uppercase">{{ best_available.zone_details.Event[0].name}}</h3> <span>
+                    <span class="pull-left"><a href="#!/eventschedule/{{ best_available.zone_details.Event[0].id}}/{{ best_available.zone_details.Event[0].slug}}"><img class="fa-fw" src="../images/banner-icon-1-calendar.png"></a> </span> <strong><small>&nbsp;{{ best_available.zone_details.EventSchedule[0].start_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</small></strong></span>-->
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <div class="col-sm-3"> <a href="#!/event/{{best_available.zone_details.Event[0].id}}/{{best_available.zone_details.Event[0].slug}}"> <img ng-src="{{best_available.zone_details.Event[0].normal_image_name}}" class="center-block img-responsive" alt="[Image: Vareka-light]" title="Vareka-light" /></a>                                </div>
+                            <div class="col-sm-9 fa-inverse"> <span class="font16">{{best_available.zone_details.Event[0].venue.name}}</span>
+                                <a href="#!/event/{{best_available.zone_details.Event[0].id}}/{{best_available.zone_details.Event[0].slug}}">
+                                    <h3 class="list-group-item-heading"> <b>{{best_available.zone_details.Event[0].name}}</b> </h3>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li class="list-group-item-heading"> <span>{{best_available.zone_details.Event[0].category.name}} </span></li>
+                                    <li> <span class="pull-left">
+                                                    <a href="#!/event/{{best_available.zone_details.Event[0].id}}/{{best_available.zone_details.Event[0].slug}}"><img class="fa-fw" src="../images/banner-icon-1-calendar.png"></a>
+                                                </span>
+                                        <p class="list-group-item-heading">&nbsp; {{best_available.zone_details.EventSchedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{best_available.zone_details.EventSchedule[0].end_date |moment:'dddd, DD.MMM.YY'}}</p>
+                                    </li>
+                                    <li> <span class="pull-left">
+                                                    <img src="../images/banner-icon-2-map.png" class="fa-fw" alt="[Image: Banner-icon-map]" title="Banner-icon-map">
+                                                </span>
+                                        <p class="list-group-item-heading">&nbsp; {{best_available.zone_details.Event[0].venue.address1}}</p>
+                                    </li>
+                                    <li> <span class="pull-left">
+                                                    <img src="../images/banner-icon-3-dollar.png" class="fa-fw" alt="[Image: Banner-icon-dollar]" title="Banner-icon-dollar">
+                                                </span>
+                                        <p class="list-group-item-heading">&nbsp; Tickets Starting From {{best_available.zone_details.Event.min_event_price | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well-sm"></div> <a class="btn btn-default text-uppercase btn-sm" href="#!/events/{{best_available.zone_details.Event[0].id}}/{{best_available.zone_details[0].id}}/choose-tickets">{{'select your own seat' | translate}}</a>
+                    <div class="well-sm"></div>
+                </div>
+                <div class="clearfix mmin-pad">
+                    <div clas="row">
+                        <div class="col-sm-12 bg-danger border-top-side  hidden-xs">
+                            <div class="col-sm-3 well-sm"> <strong>{{'Choose Seating Zone'|translate}}</strong> </div>
+                            <div class="col-sm-9 well-sm"> <strong>{{'Choose Seating Zone	Choose number of Tickets'|translate}}</strong> </div>
+                        </div>
+                    </div>
+                    <div clas="row">
+                        <div class="col-sm-12 border none-pad choose-seat-event-block zones_wrapper" ng-repeat="zone_detail in best_available.zone_details[0].event_zone track by $index" id="zones_{{zone_detail.id}}">
+                            <div class="col-sm-3 media">
+                                <div class="radio" ng-click="best_available.changeZoneOnParentClick(zone_detail.id)"> <label><input type="radio" name="event_zone" ng-model="best_available.details.event_zone_id" ng-value="zone_detail.id" ng-change="best_available.switchZone(zone_detail.id)"/> {{zone_detail.venue_zone.name}}</label> </div>
+                            </div>
+                            <div class="col-sm-9 bg-seats well-sm form-alter">
+                                <div ng-repeat="event_price in zone_detail.event_zone_prices" class="col-sm-3" ng-class="{'seat-block-border':!$last}"> <span class="clearfix">{{event_price.price_type.name}}</span> <select class="form-control clearfix" ng-show="best_available.details.event_zone_id === zone_detail.id" ng-model="best_available.event_zone_select[event_price.id]"
+                                        ng-change="best_available.addPriceDetails(event_price.price_type, event_price.price, best_available.details.event_zone_id, best_available.event_zone_select[event_price.id])">
+                                        <option value="">{{'Select tickets'|translate}}</option>
+                                        <option value="1">1 ticket = {{formatCurrency(event_price.price) * 1 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="2">2 ticket = {{formatCurrency(event_price.price) * 2 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="3">3 ticket = {{formatCurrency(event_price.price) * 3 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="4">4 ticket = {{formatCurrency(event_price.price) * 4 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="5">5 ticket = {{formatCurrency(event_price.price) * 5 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="6">6 ticket = {{formatCurrency(event_price.price) * 6 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="7">7 ticket = {{formatCurrency(event_price.price) * 7 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="8">8 ticket = {{formatCurrency(event_price.price) * 8 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="9">9 ticket = {{formatCurrency(event_price.price) * 9 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="10">10 ticket = {{formatCurrency(event_price.price) * 10 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="11">11 ticket = {{formatCurrency(event_price.price) * 11 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                        <option value="12">12 ticket = {{formatCurrency(event_price.price) * 12 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</option>
+                                    </select> <span ng-show="best_available.details.event_zone_id !== zone_detail.id">{{formatCurrency(event_price.price) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}&nbsp; 
+                                    </span>
+                                    <my-modal ng-show="best_available.details.event_zone_id !== zone_detail.id" body="<p><strong>Tickets:</strong> &nbsp; {{formatCurrency(event_price.price) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p><p><strong>Transaction Processing Fee:</strong> &nbsp; {{0 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p><p><strong>Payment Handling Fee:</strong> &nbsp; {{0 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p<br><p>All fees are estimated until tickets are released for sale. Group bookings of more than 12 tickets and bookings for entire boxes, cannot be made online. If you would like to make a group booking or book an entire box please phone the box office on 0845 401 5040 from 9am on Saturday 7 May.</p>"
+                                        name="{{best_available.zone_details.Event[0].name}}"> <span class="text-danger star">{{'Including fees'|translate}}</span></my-modal>
+                                    <div class="price visible-xs">{{formatCurrency(event_price.price) | currency : selectedCurrency.currency_symbol.currency_symbol : GeneralConfig.fraction}}&nbsp;
+                                        <my-modal class="" body="<p><strong>Tickets:</strong> &nbsp; {{formatCurrency(event_price.price) | currency : selectedCurrency.currency_symbol.currency_symbol : GeneralConfig.fraction}}</p><p><strong>Transaction Processing Fee:</strong> &nbsp; {{0 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p><p><strong>Payment Handling Fee:</strong> &nbsp; {{0 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p<br><p>All fees are estimated until tickets are released for sale. Group bookings of more than 12 tickets and bookings for entire boxes, cannot be made online. If you would like to make a group booking or book an entire box please phone the box office on 0845 401 5040 from 9am on Saturday 7 May.</p>"
+                                            name="{{best_available.zone_details.Event[0].name}}"> <span class="text-danger star">{{'Including fees'|translate}}</span></my-modal>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="well-sm"></div>
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <my-modal body="<img class='img-responsive' src='../images/venue-10.jpeg'/>" size="md" name="View Seating Plan">
+                                <a class="text-danger text-decoration-none cursor-pointer" href="">
+                                    <h4>{{'View Seating Plan'|translate}}</h4>
+                                </a>
+                            </my-modal>
+                            <p>{{'Wheelchair users please call the box office on 020 7070 4410 to book.'|translate}}</p>
+                            <p>{{'Prices shown include fees, a full breakdown is available in the basket. Tickets are not reserved until they have been added to your basket.'|translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="pull-right"> <a class="btn custom-section btn-sm text-uppercase ">{{'Cancel'|translate}}</a> <a class="btn btn-danger btn-sm text-uppercase" ng-click="best_available.checkAvailability()">{{'Add to Basket'|translate}}</a> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

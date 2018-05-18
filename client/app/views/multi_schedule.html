@@ -1,0 +1,39 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row pspace9">
+            <div class="clearfix text-center navbar-btn">
+                <ul class="breadcrumb list-group-item-text no-border-rad">
+                    <li class="active"><strong>{{'CHOOSE TICKETS'|translate}}</strong> </li>
+                    <li> <span>{{'YOUR BASKET'|translate}}</span> </li>
+                    <li class=""> <span>{{'DELIVERY METHOD'|translate}}</span> </li>
+                    <li class=""> <span>{{'PAYMENT'|translate}}</span> </li>
+                    <li class=""> <span>{{'CONFIRMATION'|translate}}</span> </li>
+                </ul>
+            </div>
+            <div class="choosedate">
+                <h2 class="list-group-item-text text-uppercase">{{model.bookings.Event[0].name}}</h2> <span>
+                        <span class="pull-left">&nbsp;</span>{{allGroupedDate['all'].start_date | moment:'dddd DD MMMM'}} - {{allGroupedDate['all'][allGroupedDate['all'].length - 1].start_date | moment:'dddd DD MMMM'}} at General Admission</span>
+                <div
+                    class="well-sm"></div>
+            <uib-tabset active="active">
+                <uib-tab heading="{{key | moment:'MMMM YYYY'}}" select="changeGroupedByYear(value[0].start_date)" ng-repeat="(key, value) in groupedByMonthAndYear">
+                    <div class="well-sm"></div>
+                    <div clas="row">
+                        <div class="col-sm-12 bg-danger border-top-side  hidden-xs">
+                            <div class="col-sm-6 well-sm"> <strong></strong> </div>
+                            <div class="col-sm-6 well-sm"> <strong>{{'Morning'|translate}}</strong> </div>
+                        </div>
+                    </div>
+                    <div clas="row">
+                        <div class="col-sm-12 border" ng-repeat="(key, value) in groupedByDate">
+                            <div class="col-sm-6 well-sm media"> <span>{{value.start_date | moment:'dddd DD'}}</span> </div>
+                            <div class="col-sm-6 well-sm">
+                                <!--<span class="text-muted clearfix" ng-repeat="(key1, value1) in groupedByTime[value.start_date]">{{value1.start_date | moment:'hh:mm A'}} Unavailable</span>--><span class="clearfix" ng-repeat="(key1, value1) in grouped[value.start_date.substring(0,10)]"><a href="#!/events/{{model.bookings.Event[0].id}}/{{model.bookings[0].id}}/choose-tickets/{{value1.id}}" class="text-danger text-decoration-none" >{{value1.start_date | moment:'hh:mm A'}}</a>&nbsp;Sale</span>                                </div>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,152 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-md-9 navbar-btn">
+                <div>
+                    <div class="navbar-btn fa-inverse">
+                        <h2 class="mb25">{{'MY DETAILS'|translate}}</h2>
+                        <form class="form-horizontal form-alter" role="form" name="myDetails" ng-submit="save(myDetails)" novalidate>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.title.$dirty && myDetails.title.$invalid || (myDetails.$submitted && myDetails.title.$invalid) }">
+                                <div class="col-sm-3"> <label for="title" class="control-label">{{'Title'|translate}}
+                                        <span class="text-danger ml5">&nbsp;*</span>
+                                    </label> </div>
+                                <div class="col-sm-9"> <select class="form-control title-span" id="title" ng-model="user.title" ng-options="titles.name as titles.name for titles in titles" name="title" ng-required="true">
+                                         <option value="">{{'Select'|translate}}</option>
+                                    </select>
+                                    <div class="help-block text-danger" ng-if="myDetails.title.$dirty || myDetails.$submitted" ng-messages="myDetails.title.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.first_name.$dirty && myDetails.first_name.$invalid || (myDetails.$submitted && myDetails.first_name.$invalid) }">
+                                <div class="col-sm-3"> <label for="first_name" class="control-label">{{'First Name'|translate}}
+                                        <span class="text-danger ml5">&nbsp;*</span>
+                                    </label> </div>
+                                <div class="col-sm-9"> <input type="text" ng-model="model.user.first_name" class="form-control" name="first_name" id="first_name" placeholder="First Name" ng-minlength="3" ng-maxlength="30" ng-required="true">
+                                    <div class="help-block text-danger"
+                                        ng-if="myDetails.first_name.$dirty || myDetails.$submitted" ng-messages="myDetails.first_name.$error" role="alert">
+                                        <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                        <div ng-message="minlength">{{'Your name is too short'|translate}}.</div>
+                                        <div ng-message="maxlength">{{'Your name is too long'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.last_name.$dirty && myDetails.last_name.$invalid || (myDetails.$submitted && myDetails.last_name.$invalid) }">
+                                <div class="col-sm-3"> <label for="last_name" class="control-label">{{'Last Name'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                                <div class="col-sm-9"> <input type="text" ng-model="model.user.last_name" class="form-control" name="last_name" id="lastname" placeholder="Last Name" ng-minlength="3" ng-maxlength="30" ng-required="true">
+                                    <div class="help-block text-danger" ng-if="myDetails.last_name.$dirty || myDetails.$submitted"
+                                        ng-messages="myDetails.last_name.$error" role="alert">
+                                        <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                        <div ng-message="minlength">{{'Your name is too short'|translate}}.</div>
+                                        <div ng-message="maxlength">{{'Your name is too long'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.email.$dirty && myDetails.email.$invalid || (myDetails.$submitted && myDetails.email.$invalid)}">
+                                <div class="col-sm-3"> <label for="email" class="control-label">{{'E-mail'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                                <div class="col-sm-9"> <input type="email" ng-model="model.user.email" class="form-control" id="email" name="email" placeholder="E-mail" ng-required="true">
+                                    <div class="help-block text-danger" ng-if="myDetails.email.$dirty || myDetails.$submitted"
+                                        ng-messages="myDetails.email.$error" role="alert">
+                                        <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                        <div ng-message="email">{{'This field must be a valid email address'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': (myDetails.phone_code.$dirty && myDetails.phone_code.$invalid) || (myDetails.phone.$dirty && myDetails.phone.$invalid) || (myDetails.$submitted && myDetails.phone_code.$invalid) || (myDetails.$submitted && myDetails.phone.$invalid) }">
+                                <div class="col-sm-3"> <label for="contact" class="control-label">{{'Contact'|translate}}
+                                                <span class="text-danger">&nbsp;*</span>
+                                            </label> </div>
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-sm-6"> <select name="phone_code" id="phone_code" class="form-control" ng-model="model.user.phone_code" ng-options="country.phone as country.phone for country in countries" ng-required="true">
+                                                        <option value="">{{'Select'|translate}}</option>
+                                                    </select> </div>
+                                        <div class="col-sm-6"> <input class="form-control" name="phone" ng-model="model.user.phone" type="text" ng-pattern="GeneralConfig.phoneNumberPattern" placeholder="Eg.51896"> </div>
+                                    </div>
+                                    <div class="help-block text-danger" ng-if="myDetails.phone_code.$dirty || myDetails.$submitted" ng-messages="myDetails.phone_code.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                    <div class="help-block text-danger" ng-if="myDetails.phone.$dirty || myDetails.$submitted" ng-messages="myDetails.phone.$error" role="alert">
+                                        <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                        <div ng-message="pattern">{{'Valid phone number is required'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.residence_country_id.$dirty && myDetails.residence_country_id.$invalid || (myDetails.$submitted && myDetails.residence_country_id.$invalid) }">
+                                <div class="col-sm-3"> <label for="residence_country_id" class="control-label">{{'Country Of Residence'|translate}}
+                                                <span class="text-danger">&nbsp;*</span>
+                                            </label> </div>
+                                <div class="col-sm-9"> <select name="residence_country_id" id="residence_country_id" class="form-control" ng-model="model.user.residence_country_id" ng-options="country.id as country.name for country in countries" ng-required="true">
+                                                <option value="">{{'Select'|translate}}</option>
+                                    </select>
+                                    <div class="help-block text-danger" ng-if="myDetails.residence_country_id.$dirty || myDetails.$submitted" ng-messages="myDetails.residence_country_id.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.address.$dirty && myDetails.address.$invalid || (myDetails.$submitted && myDetails.address.$invalid)}">
+                                <div class="col-sm-3"> <label for="address" class="control-label">{{'Address line #1'|translate}}
+                                        <span class="text-danger ml5">&nbsp;*</span>
+                                    </label> </div>
+                                <div class="col-sm-9"> <input type="text" ng-model="model.user.address" class="form-control" name="address" placeholder="Address line #1" id="goo-place" ng-required="true">
+                                    <div class="help-block text-danger" ng-if="myDetails.address.$dirty || myDetails.$submitted"
+                                        ng-messages="myDetails.address.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3"> <label for="firstname" class="control-label">{{'Address line #2'|translate}}
+                                    </label> </div>
+                                <div class="col-sm-9"> <input type="text" ng-model="model.user.address1" class="form-control" name="address1" id="address1" placeholder="Address line #2"> </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.occupation_id.$dirty && myDetails.occupation_id.$invalid || (myDetails.$submitted && myDetails.occupation_id.$invalid) }">
+                                <div class="col-sm-3"> <label for="occupation_id" class="control-label">{{'Occupations'|translate}}
+                                                <span class="text-danger">&nbsp;*</span>
+                                            </label> </div>
+                                <div class="col-sm-9"> <select name="occupation_id" id="occupation_id" class="form-control" ng-model="model.user.occupation_id" ng-options="occupation.id as occupation.name for occupation in occupations" ng-required="true">
+                                                <option value="">{{'Select'|translate}}</option>
+                                    </select>
+                                    <div class="help-block text-danger" ng-if="myDetails.occupation_id.$dirty || myDetails.$submitted" ng-messages="myDetails.occupation_id.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.education_id.$dirty && myDetails.education_id.$invalid || (myDetails.$submitted && myDetails.education_id.$invalid) }">
+                                <div class="col-sm-3"> <label for="education_id" class="control-label">{{'Educations'|translate}}
+                                                <span class="text-danger">&nbsp;*</span>
+                                            </label> </div>
+                                <div class="col-sm-9"> <select name="education_id" id="education_id" class="form-control" ng-model="model.user.education_id" ng-options="education.id as education.name for education in educations" ng-required="true">
+                                                <option value="">{{'Select'|translate}}</option>
+                                    </select>
+                                    <div class="help-block text-danger" ng-if="myDetails.education_id.$dirty || myDetails.$submitted" ng-messages="myDetails.education_id.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myDetails.mobile.$dirty && myDetails.mobile.$invalid || (myDetails.$submitted && myDetails.mobile.$invalid)}">
+                                <div class="col-sm-3"> <label for="mobile" class="control-label">{{'Mobile phone No'|translate}}
+                                        <span class="text-danger ml5">&nbsp;*</span>
+                                    </label> </div>
+                                <div class="col-sm-9"> <input type="text" ng-model="model.user.mobile" class="form-control" name="mobile" id="mobile" placeholder="Mobile phone No" ng-pattern="GeneralConfig.phoneNumberPattern" ng-required="true">
+                                    <div class="help-block text-danger"
+                                        ng-if="myDetails.mobile.$dirty || myDetails.$submitted" ng-messages="myDetails.mobile.$error" role="alert">
+                                        <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                        <div ng-message="pattern">{{'Valid phone number is required'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group text-right m-r-0"> <button type="submit" ng-disabled="save_btn" class="btn btn-danger">{{'Update'|translate}}</button> </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

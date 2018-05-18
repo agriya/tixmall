@@ -1,0 +1,26 @@
+<div class="section p-b-0 fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <h4><span><img src="../images/banner-icon-1-calendar.png" class="fa-fw"></span>&nbsp;{{'UPCOMING EVENTS'|translate}}</h4>
+                <ul class="list-unstyled" ng-show="venue.venueDetails.upcoming_events.length > 0">
+                    <li ng-repeat="upcoming_event in venue.venueDetails.upcoming_events"> <a href="#!/event/{{upcoming_event.id}}/{{upcoming_event.slug}}"><img ng-src="{{upcoming_event.image_name}}" title="{{upcoming_event.name}}" alt="{{upcoming_event.name}}" /></a> </li>
+                </ul>
+                <p ng-show="venue.venueDetails.upcoming_events.length === 0">{{'There are no upcoming events for this venue. You can like this venue and we will inform you when a new event is announced.'|translate}}</p>
+                <div class="well-sm"></div>
+                <h4><i class="fa fa-star fa-lg text-danger"></i>&nbsp;{{'PAST EVENTS'|translate}}</h4>
+                <ul class="list-unstyled" ng-show="venue.venueDetails.past_events.length > 0">
+                    <li ng-repeat="past_event in venue.venueDetails.past_events"> <a href="#!/event/{{past_event.id}}/{{past_event.slug}}"><img ng-src="{{past_event.image_name}}" title="{{past_event.name}}" alt="{{past_event.name}}" /></a> </li>
+                </ul>
+                <p ng-show="venue.venueDetails.past_events.length === 0">{{'There are no past events for this venue. You can like this venue and we will inform you when a new event is announced.'|translate}}</p>
+            </div>
+            <div class="col-md-6 col-sm-6 well"> <a href="#!/venue/{{venue.venueDetails.id}}/{{venue.venueDetails.slug}}"> <img ng-src="{{venue.venueDetails.image_name}}" class="center-block img-responsive" alt="{{venue.venueDetails.name}}" title="{{venue.venueDetails.name}}" /></a>
+                <h3
+                    class="initialism">{{'ABOUT THIS VENUE'|translate}}</h3>
+                    <p ng-bind-html="venue.venueDetails.description"></p>
+                    <p>{{venue.venueDetails.name}}</p>
+                    <p>{{venue.venueDetails.address}}</p>
+            </div>
+        </div>
+        <hr> </div>
+</div>

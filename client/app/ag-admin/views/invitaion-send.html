@@ -1,0 +1,42 @@
+<div id="container" class="invitation send" ng-controller="InvitationSendCtrl">
+    <div class="col-xs-12">
+        <form class="form-horizontal sales-report-filter" name="invitationForm" novalidate ng-submit="sendInvitation(invitationForm.$valid)">
+            <div class="form-group"> <label for="event_name" class="col-sm-2 control-label">Event &nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="selected_event" id="event_name" ng-model="invite.event" ng-options="allEvent as allEvent.name for allEvent in allEvents" ng-change="eventChange(invite.event)" ng-required="true">
+                            <option value="">All Events</option>
+                         </select><span class="text-danger" ng-show="(invitationForm.$submitted || invitationForm.selected_event.$touched)&&(invitationForm.selected_event.$pristine || invitationForm.selected_event.$invalid) && (invitationForm.selected_event.$error.required)">Required</span>                    </div>
+            </div>
+            <div class="form-group"> <label for="selected_schedule" class="col-sm-2 control-label">Event Date&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select ng-disabled="dateDidabled" class="form-control" name="selected_schedule" id="selected_schedule" ng-model="invite.event_schedule_id" ng-options="eventSchedule.id as (eventSchedule.start_date|date) for eventSchedule in eventSchedules"
+                        ng-required="true">
+                            <option value="">All Dates</option>
+                         </select><span class="text-danger" ng-show="(invitationForm.$submitted || invitationForm.selected_schedule.$touched)&&(invitationForm.selected_schedule.$pristine || invitationForm.selected_schedule.$invalid) && (invitationForm.selected_schedule.$error.required)">Required</span>                    </div>
+            </div>
+            <div class="form-group"> <label for="selected_pricetype" class="col-sm-2 control-label">Ticket Type&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="selected_pricetype" id="selected_pricetype" ng-model="invite.price_type_id" ng-options="priceType.id as priceType.name for priceType in priceTypes" ng-required="true">
+                            <option value="">All Tickets</option>
+                         </select><span class="text-danger" ng-show="(invitationForm.$submitted || invitationForm.selected_event.$touched)&&(invitationForm.selected_pricetype.$pristine || invitationForm.selected_pricetype.$invalid) && (invitationForm.selected_pricetype.$error.required)">Required</span>                    </div>
+            </div>
+            <div class="form-group"> <label for="delivery_type" class="col-sm-2 control-label">Select Delivery Type&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="delivery_type" ng-model="invite.is_send_to_list" id="delivery_type" ng-required="true">
+                            <option value="">Select Delivery Type</option>
+                            <option value="1">Send to a Specific User List</option>
+                            <option value="0">Send to a Registered Guest</option>
+                         </select><span class="text-danger" ng-show="(invitationForm.$submitted || invitationForm.delivery_type.$touched)&&(invitationForm.delivery_type.$pristine || invitationForm.delivery_type.$invalid) && (invitationForm.delivery_type.$error.required)">Required</span>                    </div>
+            </div>
+            <div class="form-group" ng-if="invite.is_send_to_list == 1"> <label for="select list" class="col-sm-2 control-label">Select Lists&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="select_list" id="select_list" ng-model="invite.list_id" ng-options="list.id as list.name for list in getAllLists" ng-required="invite.is_send_to_list">
+                            <option value="">Select Lists</option>
+                         </select><span class="text-danger" ng-show="(invitationForm.$submitted || invitationForm.select_list.$touched)&&(invitationForm.select_list.$pristine || invitationForm.select_list.$invalid) && (invitationForm.select_list.$error.required)">Required</span>                    </div>
+            </div>
+            <div class="form-group" ng-if="invite.is_send_to_list == 0"> <label for="select guest" class="col-sm-2 control-label">Select Guests&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" name="select_guest" id="select_guest" ng-model="invite.guest_id" ng-options="guest.id as guest.first_name for guest in getAllGuests" ng-required="!invite.is_send_to_list">
+                            <option value="">Select Guests</option>
+                         </select><span class="text-danger" ng-show="(invitationForm.$submitted || invitationForm.select_guest.$touched)&&(invitationForm.select_guest.$pristine || invitationForm.select_guest.$invalid) && (invitationForm.select_guest.$error.required)">Required</span>                    </div>
+            </div>
+            <div class="form-group"> <label for="date_range" class="col-sm-2 control-label">&nbsp;</label>
+                <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7 "> <span class="edit-button"> <button type="submit" class="btn btn-default">Send</button></span> </div>
+            </div>
+        </form>
+    </div>
+</div>

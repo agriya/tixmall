@@ -1,0 +1,116 @@
+<div ng-if="actionType === 'add'">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <ma-view-actions>
+                    <ma-back-button></ma-back-button>
+                </ma-view-actions>
+                <h1><span>Event Zone Add</span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row " id="create-view">
+        <form class="col-lg-12 form-horizontal" name="event_zone" ng-submit="event.eventZoneAdd()">
+            <div class="row">
+                <div id="row-event-zone-name" class="form-group has-feedback"> <label for="venueZone" class="col-sm-2 control-label">Event zone name&nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <input type="text" class="form-control" ng-model="event.event_zone_details.name" ng-required="true" /> </div>
+                </div>
+                <div id="row-event-venue-zone" class="form-group has-feedback" ng-show="event.venue_zone_details.length > 0"> <label for="venueZone" class="col-sm-2 control-label">Venue Zone&nbsp;<span class="text-danger"><span class="text-danger">*</span></span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" id="venue_zone" name="language" ng-model="event.event_zone_details.venue_zone_id" data-ng-change="event.zoneChange(event.event_zone_details.venue_zone_id)" ng-options="venue_zone_detail.id as venue_zone_detail.name for venue_zone_detail in event.venue_zone_details">														
+                                                        <option value="" >---{{'Please select'|translate}}---</option>	
+                                                    </select> </div>
+                </div>
+                <div ng-show="event.event_zone_array.length > 0">
+                    <div id="row-event-venue-zone" class="form-group has-feedback"> <label for="venueZone" class="col-sm-2 control-label">Section &nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                        <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                            <div class="clearfix " ng-repeat="(key, value) in event.event_zone_array">
+                                <ng-form>
+                                    <div class="col-sm-3 seats"> <label class="seat"><input type ="checkbox" checklist-model="event.selectedsections.section"  checklist-value="value.section" >&nbsp;{{value.section.name}}</label> </div>
+                                    <div class="col-sm-9 seats"> <label ng-repeat="venue_zone_row in value.section.row" class="venue_zone_rows seat">
+                                            <input type ="checkbox" checklist-model="event.selectedsections.row"  checklist-value="venue_zone_row" >&nbsp;{{venue_zone_row.name}} &nbsp;&nbsp;&nbsp;
+                                       </label> </div>
+                                    <div class="well-lg navbar-btn"></div>
+                                </ng-form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="event.event_zone_array.length == 0" class="col-sm-offset-2">
+                    <div class="well-lg"></div>
+                    <div class="well-lg"></div>
+                    <h3 class="text-danger">No seat selection available for this event zone</h3>
+                    <div class="well-lg"></div>
+                    <div class="well-lg"></div>
+                </div>
+                <div id="row-event-zone-name" class="form-group has-feedback" ng-show="event.venue_zone_details.length == 0"> <label for="available_count" class="col-sm-2 control-label">Available Count&nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <input type="text" class="form-control" name="available_count" id="available_count" ng-model="event.event_zone_details.available_count" /> </div>
+                </div>
+                <div id="row-event-venue-zone" class="form-group has-feedback"> <label for="venueZone" class="col-sm-2 control-label">Price &nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                        <div class="clearfix" ng-repeat="(key,value1) in event.price_types"> <label class="radio-inline"><input type="checkbox" ng-model="event.event_price_details[key]['price_type_id']" ng-true-value ="{{value1.id}}" ng-required="true"> {{value1.name}} &nbsp;&nbsp;
+
+                                    <input type="text" ng-required="true" ng-model="event.event_price_details[key]['price']" />
+                                    </label> </div>
+                        <div class="well-lg navbar-btn"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8"> <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Submit</button> </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div ng-if="actionType === 'update'">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <ma-view-actions>
+                    <ma-back-button></ma-back-button>
+                </ma-view-actions>
+                <h1><span>Event Zone Edit</span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row " id="edit-view">
+        <form class="col-lg-12 form-horizontal" name="event_zone" ng-submit="eventZoneUpdate()">
+            <div class="row">
+                <div id="row-event-zone-name" class="form-group has-feedback"> <label for="eventzone" class="col-sm-2 control-label">Event zone name&nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <input type="text" class="form-control" id="eventzone" ng-model="event.event_zone_details.name" /> </div>
+                </div>
+                <div id="row-event-venue-zone" class="form-group has-feedback"> <label for="venueZone" class="col-sm-2 control-label">Venue Zone&nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <select class="form-control" id="venue_zone" name="language" ng-model="event.event_zone_details.venue_zone_id" data-ng-change="event.zoneChange(event.event_zone_details.venue_zone_id)" ng-options="venue_zone_detail.id as venue_zone_detail.name for venue_zone_detail in event.venue_zone_details">														
+                                                        <option value="" >---{{'Please select'|translate}}---</option>	
+                                                    </select> </div>
+                </div>
+                <div id="row-event-venue-zone" class="form-group has-feedback"> <label for="venueZone" class="col-sm-2 control-label">Section &nbsp;*&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                        <div class="clearfix" ng-repeat="(key, value) in event.event_zone_array">
+                            <ng-form>
+                                <div class="col-sm-3"> <label><input type="checkbox"  ng-checked="isCheckedSections(value.section)"  checklist-model="event.selectedsections.section"  checklist-value="value.section" >&nbsp;{{value.section.name}}</label> </div>
+                                <div class="col-sm-9">
+                                <label ng-repeat="venue_zone_row in value.section.row" class="venue_zone_rows"><input type ="checkbox"  checklist-model="event.selectedsections.row"  checklist-value="venue_zone_row" ng-checked="isCheckedRows(venue_zone_row)" >&nbsp;{{venue_zone_row.name}} &nbsp;&nbsp;&nbsp;</label>                                    </div>
+                                <div class="well-lg navbar-btn"></div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <div id="row-event-zone-name" class="form-group has-feedback" ng-show="event.venue_zone_details.length == 0"> <label for="available_count" class="col-sm-2 control-label">Available Count&nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7"> <input type="text" class="form-control" name="available_count" id="available_count" ng-model="event.event_zone_details.available_count" /> </div>
+                </div>
+                <div id="row-event-venue-zone" class="form-group has-feedback"> <label for="venueZone" class="col-sm-2 control-label">Price &nbsp;<span class="text-danger">*</span>&nbsp;</label>
+                    <div class="ng-admin-type-text col-sm-10 col-md-8 col-lg-7">
+                        <div class="clearfix" ng-repeat="(key,value1) in event.price_types"> <label class="radio-inline"><input type="checkbox" ng-model="event.event_price_details[key]['price_type_id']" ng-true-value ="{{value1.id}}" ng-checked="isCheckedPrices(value1)" ng-required="true"> {{value1.name}} &nbsp;&nbsp;
+
+                                    <input type="text" ng-model="event.event_price_details[key]['price']" ng-required="true"/>
+                                    </label> </div>
+                        <div class="well-lg navbar-btn"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8"> <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Save Changes</button> </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

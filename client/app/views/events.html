@@ -1,0 +1,66 @@
+<div class="section p-b-0 fa-inverse">
+    <div class="container">
+        <div class="row">
+            <h2>{{'EVENTS' |translate}}</h2>
+            <div class="col-sm-4 col-md-3 nav">
+                <form class="form-horizontal form-alter filter-block" role="form" name="userSignup" ng-submit="save()">
+                    <h4 class="fa-inverse">WHAT'S HAPPENING FROM...</h4> <input type="text" uib-datepicker-popup=yyyy-MM-dd class="form-control" ng-model="eventscontroller.date" on-open-focus='true' is-open="eventscontroller.opened" datepicker-options="dateOptions" close-text="Close"
+                        alt-input-formats="altInputFormats" ng-focus="eventscontroller.open1()" ng-change="eventscontroller.dateFilter(eventscontroller.date);" />
+                    <!--<select name="date" id="date" class="form-control pull-left clsSelectOption" ng-model="eventscontroller.date" ng-change="eventscontroller.dateFilter(eventscontroller.date);">
+                                    <option value="">Today</option>
+                        </select> <a href="" class="btn btn-danger btn-sm">SHOW ME</a>-->
+                    <hr> <br>
+                    <h4 class="fa-inverse">OR FILTER RESULTS BY...</h4> <select name="venue" id="venue" class="form-control" ng-model="eventscontroller.venue_id" ng-change="eventscontroller.venueChange(eventscontroller.venue_id)" ng-options="venue.id as venue.name for  venue in eventscontroller.venuesLists">
+                          <option value="">Choose a venue</option>
+                    </select>
+                    <hr> <select name="category" id="phone_code" class="form-control" ng-model="eventscontroller.category_id" ng-change="eventscontroller.categoryChange(eventscontroller.category_id)" ng-options="category.id as category.name for  category in eventscontroller.categoriesLists">
+                        <option value="">Choose a category</option>
+                    </select>
+                    <hr> <select name="series" id="series" class="form-control" ng-model="eventscontroller.series_id" ng-change="eventscontroller.seriesChange(eventscontroller.series_id)" ng-options="series.id as series.name for series in eventscontroller.seriesLists">
+                          <option value="">Choose a series</option>
+                    </select>
+                    <hr>
+                    <div class="checkbox"> <label class="fa-inverse">
+                            <input type="checkbox"> Hide sold out events
+                            </label> </div>
+                    <hr> <br>
+                    <figure class="fa-inverse text-center"> <img src="../images/event-img.jpg" class="center-block img-responsive" />
+                        <figcaption class="text-uppercase well-sm bg-danger">Guided Tours and Exhibitions</figcaption>
+                        <figure>
+                </form>
+            </div>
+            <div class="col-sm-8 col-md-9 well event-list-block">
+                <h3 class="navbar-btn">{{'Events results'|translate}}
+                    <h5 class="fa-inverse"><img src="../images/calendar-icon.png" class="pull-left">&nbsp; {{eventscontroller.eventLists.length}}&nbsp;{{'event(s) were found for the selected date'|translate}} <span class="initialism">{{eventscontroller.searchDate | moment:'dddd, MMM.DD,YYYY'}}</span></h5>
+                    <div class="well-sm"></div>
+                    <div class="clearfix mb25" ng-repeat="event in eventscontroller.eventLists" ng-class="{'sep-bot': !$last}">
+                        <div class="col-sm-3 col-xs-4 xs-pad-0 sm-pad-0"> <a href="#!/event/{{event.id}}/{{event.slug}}"> <img ng-src="{{event.image_name}}" class="center-block img-responsive" alt="{{event.name}}" title="{{event.name}}"
+                                /></a> </div>
+                        <div class="col-sm-9 fa-inverse col-xs-8"> <a class="btn btn-danger pull-right text-uppercase btn-sm" href="#!/events/{{event.id}}/{{event.venue.id}}/choose-tickets/{{event.event_schedule[0].id}}" ng-show="event.event_schedule.length == 1">Book now</a> <a class="btn btn-danger pull-right text-uppercase btn-sm"
+                                href="#!/eventschedule/{{event.id}}/{{event.slug}}" ng-show="event.event_schedule.length > 1">Book now</a> <span class="font16 initialism">{{event.venue.name}}</span>
+                            <a href="#!/event/{{event.id}}/{{event.slug}}">
+                                <h3 class="list-group-item-heading"> <b class="initialism">{{event.name}}</b> </h3>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li class="list-group-item-heading initialism"> <span>{{event.category.name}} </span></li>
+                                <p class="list-group-item-heading"><span><img src="../images/banner-icon-1-calendar.png" class="fa-fw"></span></a><span class="margin-left-5">&nbsp; {{event.event_schedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{event.event_schedule[0].end_date |moment:'dddd, DD.MMM.YY'}}</p>
+                            </li>
+                            <li> <span class="pull-left initialism">
+                                            <img src="../images/banner-icon-2-map.png" class="fa-fw" alt="[Image: Banner-icon-map]" title="Banner-icon-map">
+                                        </span>
+                                    <p class="list-group-item-heading">&nbsp; {{event.venue.address1}}</p>
+                                    </li>
+                                    <li> <span class="pull-left initialism">
+                                  <img src="../images/banner-icon-3-dollar.png" class="fa-fw" alt="[Image: Banner-icon-dollar]" title="Banner-icon-dollar">
+                                        </span>
+                                        <p class="list-group-item-heading">&nbsp; {{event.min_price+'-'+event.max_price | pricedisplayrange}}</p>
+                                    </li>
+                            </ul>
+                            <div class="well-sm"></div>
+                            <p ng-bind-html="event.description" class="htruncate-m2 truncated-text"></p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

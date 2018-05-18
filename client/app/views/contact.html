@@ -1,0 +1,85 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 navbar-btn col-sm-offset-1">
+                <h2 class="text-danger">{{'Contact Us'|translate}}</h2>
+                <div class="well-sm"></div>
+                <form class="form-horizontal form-alter" role="form" name="contactForm" ng-submit="save()" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': contactForm.first_name.$dirty && contactForm.first_name.$invalid || (contactForm.$submitted && contactForm.first_name.$invalid)}">
+                        <div class="col-sm-3"> <label for="first_name" class="control-label">{{'First Name'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="contact.first_name" ng-pattern="GeneralConfig.userNamePattern" ng-minlength="3" ng-maxlength="30" class="form-control" id="first_name" name="first_name" placeholder="{{'First Name'|translate}}" ng-required="true">
+                            <div class="help-block text-danger" ng-if="contactForm.first_name.$dirty || contactForm.$submitted" ng-messages="contactForm.first_name.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="minlength">{{'Your name is too short'|translate}}.</div>
+                                <div ng-message="maxlength">{{'Your name is too long'|translate}}.</div>
+                                <div ng-message="pattern">{{'First character shouldn\'t starts with number or special character and spaces not allowed between characters' |translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': contactForm.last_name.$dirty && contactForm.last_name.$invalid || (contactForm.$submitted && contactForm.last_name.$invalid)}">
+                        <div class="col-sm-3"> <label for="last_name" class="control-label">{{'Last Name'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="contact.last_name" ng-pattern="GeneralConfig.userNamePattern" ng-minlength="3" ng-maxlength="30" class="form-control" id="last_name" name="last_name" placeholder="{{'Last Name'|translate}}" ng-required="true">
+                            <div class="help-block text-danger" ng-if="contactForm.last_name.$dirty || contactForm.$submitted" ng-messages="contactForm.last_name.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="minlength">{{'Your name is too short'|translate}}.</div>
+                                <div ng-message="maxlength">{{'Your name is too long'|translate}}.</div>
+                                <div ng-message="pattern">{{'First character shouldn\'t starts with number or special character and spaces not allowed between characters' |translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': contactForm.email.$dirty && contactForm.email.$invalid || (contactForm.$submitted && contactForm.email.$invalid)}">
+                        <div class="col-sm-3"> <label for="email" class="control-label">{{'E-mail'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="email" ng-model="contact.email" name="email" class="form-control" id="email" placeholder="{{'E-mail'|translate}}" ng-required="true">
+                            <div class="help-block text-danger" ng-if="contactForm.email.$dirty || contactForm.$submitted"
+                                ng-messages="contactForm.email.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="email">{{'This field must be a valid email address'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': contactForm.phone.$dirty && contactForm.phone.$invalid || (contactForm.$submitted && contactForm.phone.$invalid)}">
+                        <div class="col-sm-3"> <label for="phone" class="control-label">{{'Mobile'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="number" ng-model="contact.phone" class="form-control" name="phone" id="phone" placeholder="Mobile" ng-pattern="GeneralConfig.phoneNumberPattern" ng-required="true">
+                            <div class="help-block text-danger" ng-if="contactForm.phone.$dirty || contactForm.$submitted"
+                                ng-messages="contactForm.phone.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="pattern">{{'Valid phone number is required'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': contactForm.subject.$dirty && contactForm.subject.$invalid || (contactForm.$submitted && contactForm.subject.$invalid)}">
+                        <div class="col-sm-3"> <label for="subject" class="control-label">{{'Subject'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="contact.subject" name="subject" class="form-control" id="subject" placeholder="Subject" ng-required="true">
+                            <div class="help-block text-danger" ng-if="contactForm.subject.$dirty || contactForm.$submitted"
+                                ng-messages="contactForm.subject.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': contactForm.message.$dirty && contactForm.message.$invalid || (contactForm.$submitted && contactForm.message.$invalid)}">
+                        <div class="col-sm-3"> <label for="message" class="control-label">{{'Message'|translate}}<span class="text-danger">&nbsp;*</span></label> </div>
+                        <div class="col-sm-9"> <textarea type="text" ng-model="contact.message" class="form-control" id="message" name="message" ng-required="true" rows="3"></textarea>
+                            <div class="help-block text-danger" ng-if="contactForm.message.$dirty || contactForm.$submitted"
+                                ng-messages="contactForm.message.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">&nbsp;</div>
+                        <div class="col-sm-9">
+                            <div vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" class="contcaptch"></div>
+                            <div class="help-block text-danger" ng-if="contactForm.$submitted" role="alert">
+                                <div ng-show="captchaVerified === false" class="text-danger">{{'Please verify captcha'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9"> <button type="submit" ng-disabled="save_btn" class="btn btn-danger">{{'Submit'|translate}}</button> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

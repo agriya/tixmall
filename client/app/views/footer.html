@@ -1,0 +1,64 @@
+<div ng-controller="FooterCtrl as model" class="footer" id="footer">
+    <div class="customcontainer">
+        <div class="footerinnerblk">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="footerlogo"> <a href="#"><img src="../images/footer-logo.png" class="img-responsive"></a> </div>
+                    <ol class="list-inline list-group-item-text footersocial">
+                        <li> <a href="https://www.facebook.com/agriya" target="blank">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+
+                            </a> </li>
+                        <li> <a href="https://twitter.com/agriya" target="blank"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
+                        <li> <a href="https://plus.google.com/+AgriyaNews" target="blank">
+                            <i class="fa fa-google-plus" aria-hidden="true"></i>
+                            </a> </li>
+                        <li> <a href="https://www.youtube.com/channel/UCcxmjGrb-E8CKXFv2RKOG5A" target="blank">
+                            <i class="fa fa-youtube" aria-hidden="true"></i>
+                            </a> </li>
+                        <li> <a href="#" target="blank">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a> </li>
+                    </ol>
+                    <div class="text-uppercase copyright"> © {{model.year}} <a href="#">{{'Tixmall.com'|translate}}.</a>{{'All rights reserved'|translate}}. </div>
+                </div>
+                <div class="col-sm-3">
+                    <ol class="list-unstyled list-group-item-text footerlinkblk">
+                        <li> <a href="#!/pages/3/aup">{{'Website accessibilty'|translate}}</a> </li>
+                        <li> <a href="#!/pages/2/terms-and-conditions">{{'Terms & Conditions'|translate}}</a> </li>
+                        <li> <a href="#!/pages/1/privacy-policy">{{'Privacy Policy'|translate}}</a> </li>
+                        <li> <a href="#!/comingsoon/coming-soon">{{'FAQs'|translate}}</a> </li>
+                        <li> <a href="#!/comingsoon/coming-soon">{{'Gift Vouchers'|translate}}</a> </li>
+                    </ol>
+                </div>
+                <div class="col-sm-3">
+                    <ol class="list-unstyled list-group-item-text footerlinkblk">
+                        <li> <a href="#!/contact">{{'Contact Us'|translate}}</a> </li>
+                        <li> <a href="#!/comingsoon/coming-soon">{{'Press Office'|translate}}</a> </li>
+                        <li> <a href="#!/comingsoon/coming-soon">{{'Cookies'|translate}}</a> </li>
+                        <li> <a href="#!/comingsoon/coming-soon">{{'Sitemap'|translate}}</a> </li>
+                        <li> <a href="#!/comingsoon/coming-soon">{{'Jobs'|translate}}</a> </li>
+                    </ol>
+                </div>
+                <div class="col-sm-3">
+                    <h6 class="text-uppercase">{{'Subscribe to News'|translate}}</h6>
+                    <form role="form" name="newsletters" class="footeremail">
+                        <div class="form-group list-group-item-text">
+                            <div class="input-group"> <input type="email" name="email" id="email" ng-model="model.newsletters.email" class="form-control" placeholder="{{'Your Email Address'|translate}}"> <span class="input-group-btn">
+                                    <a class="btn btn-danger" ng-click="model.newsletterJoin(newsletters);">{{'JOIN'|translate}}</a>
+                                </span> </div>
+                        </div>
+                    </form>
+                    <div class="clearfix fpaymentoptions">
+                        <ol class="list-inline">
+                            <li> <a href="#"><img src="../images/visa-img.png" alt="[Image: Visa]" class="img-responsive" width="40px"></a> </li>
+                            <li> <a href="#"><img src="../images/visa-electron-img.png" alt="[Image: Visa-Electron]" class="img-responsive" width="40px"></a> </li>
+                            <li> <a href="#"><img src="../images/master-card.png" alt="[Image: Master]" class="img-responsive" width="40px"></a> </li>
+                            <li> <a href="#"><img src="../images/maestro.png" alt="[Image:Maestro]" class="img-responsive" width="40px"></a> </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

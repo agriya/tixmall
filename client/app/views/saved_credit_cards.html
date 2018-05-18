@@ -1,0 +1,25 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-md-9 navbar-btn">
+                <h2 class="text-uppercase mb25">{{'My Saved Payment Cards'|translate}} </h2>
+                <ul class="list-unstyled" ng-show="savedcards.details.length > 0" id="card_container">
+                    <li ng-repeat="savedcard in savedcards.details | unique:'masked_cc'" id="card_details_{{savedcard.id}}">
+                        <div class="myacc-block">
+                            <div class="text-xs-right"> <a href="" ng-click="savedcards.deleteCard(savedcard.id)" class="cursor-pointer"><i class="fa fa-times-circle text-danger"></i></a> </div>
+                            <p><strong>{{savedcard.name}}</strong></p>
+                            <p>xxxxxxxxxxxxxx{{savedcard.masked_cc}}</p>
+                            <p>{{savedcard.card_type}}</p>
+                            <p>{{savedcard.exp_month}}/{{savedcard.exp_year}} </p>
+                        </div>
+                        <div class="well-sm"></div>
+                    </li>
+                </ul>
+                <p ng-show="savedcards.details.length === 0">{{'You have no saved cards at the moment.'|translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="section pr fixed-banner">
+    <div class="cover-image" style="background-image : url('../images/login-bg.jpg')"></div>
+</div>
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row pspace9">
+            <div class="clearfix text-center">
+                <ul class="breadcrumb list-group-item-text">
+                    <li> <span>{{'CHOOSE TICKETS'|translate}}</span> </li>
+                    <li> <span>{{'YOUR BASKET'|translate}}</span> </li>
+                    <li class=""> <span>{{'DELIVERY METHOD'|translate}}</span> </li>
+                    <li class=""><span>{{'PAYMENT'|translate}}</span></li>
+                    <li class="active"> <strong>{{'CONFIRMATION'|translate}}</strong> </li>
+                </ul>
+            </div>
+            <div class="clearfix">
+                <div class="clearfix">
+                    <div class="well-sm"></div>
+                    <div class="col-sm-6 col-xs-6">
+                        <h3 class="navbar-btn row">{{'YOUR PURCHASE IS COMPLETE'|translate}}</h3>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 text-right"> <img src="../images/ticketing-secure-badge.png" class="img-responsive pull-right navbar-btn row" alt="secure booking"> </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <!-- first block start -->
+                <div class="thumbnail transparency clearfix">
+                    <div class="well-sm"></div>
+                    <div class="col-sm-8">
+                        <dl class="dl-horizontal dl-left well-sm"> <dt>Name:</dt>
+                            <dd>{{paymentresult.user.first_name}}</dd> <dt>Order Number:</dt>
+                            <dd>{{paymentresult.order_details.id}}</dd>
+                        </dl>
+                        <div class="clearfix well-sm"> <a href="#!/users/settings" class="btn custom-section text-uppercase btn-sm">MY ACCOUNT</a> </div>
+                        <div class="clearfix well-sm"> <a href="" class="btn custom-section text-uppercase btn-sm">PLAN YOUR VISIT</a> </div>
+                        <h5 class="pleft9">Your print at home tickets will be delivered to : <span>{{paymentresult.user.email}}</span> </h5>
+                        <h5 class="pleft9">You will shortly receive an email confirming your order. Please keep a note of your order number.</h5>
+                        <!--<div class="well-sm clearfix pull-left mbot20">
+                            <a href="#" class="pull-left mright mt5"><img src="../images/tweet-img.png" /></a>
+                            <a href="#" class="pull-left mright mt5"><img src="../images/fb-share.png" /></a> <a href="#" class="btn custom-section text-uppercase btn-sm pull-left mright">EMAIL TO FRIENDS</a> </div>--></div>
+                    <div class="col-md-4">
+                        <div class="pull-right"> <a href="#" class="btn custom-section text-uppercase" ng-click="paymentresult.print()"> <i class="fa fa-fw fa-print"></i> print this page</a> </div>
+                    </div>
+                </div>
+                <!-- first block end -->
+                <h3>{{'ORDER SUMMARY'|translate}}</h3>
+                <div clas="row">
+                    <div class="col-sm-12 bg-danger border-top-side  hidden-xs">
+                        <div class="col-sm-6 well-sm"> <strong>Item(s)</strong> </div>
+                        <div class="col-sm-2 well-sm"> <strong>{{'Quantity'|translate}}</strong> </div>
+                        <div class="col-sm-2 well-sm"> <strong>{{'Price'|translate}}</strong> </div>
+                        <div class="col-sm-2 well-sm"> <strong>{{'Total'|translate}}</strong> </div>
+                    </div>
+                </div>
+                <div clas="row">
+                    <div class="col-sm-12 border-top-side" ng-repeat="item in Cart.getCart().items track by $index">
+                        <div class="navbar-btn"></div>
+                        <div class="col-sm-6 well-sm">
+                            <h3 class="list-group-item-heading text-uppercase "> <b>{{item.getName()}}</b> </h3>
+                            <ul class="list-unstyled ">
+                                <li ng-show="item.getName() !== 'Gift Voucher'">
+                                    <p class="list-group-item-heading" ng-show="item.getDatat().event_start_date"> <small>{{item.getDatat().event_start_date | moment:'dddd, DD MMM YYYY hh:mm A'}} - {{item.getDatat().event_end_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</small> </p>
+                                </li>
+                                <li ng-show="item.getName() !== 'Gift Voucher'">
+                                    <p class="list-group-item-heading" ng-show="item.getData().zone_name"> <small>{{item.getData().zone_name}},&nbsp;{{item.getData().venue_zone_section_name}},&nbsp;{{'Row'|translate}}&nbsp;{{item.getData().venue_zone_section_row_name}},&nbsp;{{'Seat'|translate}}&nbsp;{{item.getData().seat_name}}</small></p>
+                                </li>
+                                <li ng-show="item.getName() !== 'Gift Voucher'">
+                                    <p class="list-group-item-heading"> <small>{{item.getQuantity()}}x {{item.getData().price.name}}</small> </p>
+                                </li>
+                            </ul>
+                            <div class="well-lg hidden-xs"></div>
+                            <div ng-if="$last">
+                                <p>{{'Tickets(s)'|translate}}&nbsp; <a href="#!/pages/2/terms-and-conditions"> <span class="text-danger ">{{'Terms and Condtions'|translate}}</span></a>&nbsp;{{'apply to your tickets'|translate}}.</p>
+                                <p>{{'Restricted Viewing'|translate}}.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 well-sm"> <span>
+                    <strong class="visible-xs col-xs-2 price_details row">{{'Quantity'|translate}}:&nbsp;</strong>{{item.getQuantity()}}</span> </div>
+                        <div class="col-sm-2 well-sm"> <span>
+                    <strong class="visible-xs col-xs-2 price_details row">{{'Price'|translate}}:&nbsp;</strong>{{formatCurrency(item.getPrice()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                        <div class="col-sm-2 well-sm">
+                        <span>
+                    <strong class="visible-xs col-xs-2 price_details row">{{'Total'|translate}}:&nbsp;</strong>{{formatCurrency(item.getTotal()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                    </div>
+                    <!-- doantion amount -->
+                    <div class="col-sm-12 border-top-side" ng-if="Cart.getDonationAmount() !== 0">
+                        <div class="navbar-btn"></div>
+                        <div class="col-sm-6 well-sm ">
+                            <div class="">
+                                <h3 class="list-group-item-heading text-uppercase navbar-btn"> <b>{{'General Donation'|translate}}</b> </h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 well-sm"> <span>
+                            <strong class="visible-xs col-xs-2 price_details row">{{'Quantity'|translate}}:&nbsp;</strong></span> </div>
+                        <div class="col-sm-2 well-sm"> <span>
+                            <strong class="visible-xs col-xs-2 price_details row">{{'Price'|translate}}:&nbsp;</strong>{{formatCurrency(Cart.getDonationAmount()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                        <div
+                            class="col-sm-2 well-sm"> <span>
+                            <strong class="visible-xs col-xs-2 price_details row">{{'Total'|translate}}:&nbsp;</strong>{{formatCurrency(Cart.getDonationAmount()) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                </div>
+            </div>
+            <div clas="row">
+                <div class="col-sm-12 border">
+                    <div class="navbar-btn"></div>
+                    <div class="col-sm-6 well-sm">
+                        <h3 class="list-group-item-heading "> <b>{{'STANDARD HANDLING FEE'|translate}}</b>&nbsp; <small>
+                        <my-modal body="In order to cover the total cost of providing our Box Office Service we charge a Payment Handling Fee which is 2% of the total transaction value and a Transaction Processing Fee of £2.50 per ticket. For the BBC Proms the transaction processing fee is £2.00 per ticket (except Advance Sale Promming tickets where it is £1.00 per ticket), up to a maximum of £25.00. Please note that different charges may apply when booking hospitality and some other events." name="Standard Handling Fees"><span class="text-danger">{{'WHAT\'S THIS?'|translate}}</span></my-modal>
+                    </small> </h3>
+                    </div>
+                    <div class="col-sm-2 well-sm hidden-xs">&nbsp;</div>
+                    <div class="col-sm-2 well-sm hidden-xs">&nbsp;</div>
+                    <div class="col-sm-2 well-sm"> <span>
+                    <strong class="visible-xs col-xs-2 price_details row">{{'Price'|translate}}:&nbsp;</strong>{{formatCurrency(((2/100)*Cart.totalCost())) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="text-right well-sm"> <span class="text-muted h4 ">
+                <b>{{'Basket Total'|translate}}:
+                  <span class="fa-inverse ">&nbsp;{{formatCurrency(((2/100)*Cart.totalCost())+ Cart.totalCost() + Cart.getDonationAmount()) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </b>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix" ng-show="payment.gift_voucher_available_amount > 0">
+            <div class="text-right well-sm"> <span class="text-muted h4 ">
+                <b>{{'Gift voucher Amount'|translate}}:
+                  <span class="fa-inverse ">&nbsp;{{formatCurrency(payment.gift_voucher_available_amount) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </b>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix" ng-show="payment.gift_voucher_available_amount > 0">
+            <div class="text-right well-sm"> <span class="text-muted h4 ">
+                <b>{{'Basket Total'|translate}}:
+                  <span class="fa-inverse ">&nbsp;{{ formatCurrency(payment.total_amount) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </b>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

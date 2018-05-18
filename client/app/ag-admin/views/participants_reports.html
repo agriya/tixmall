@@ -1,0 +1,29 @@
+<div id="container" class="sales-report">
+    <reports-filter callback="participant_reports.refreshFilters(filter)" type="participants"></reports-filter>
+    <div class="alert alert-info" ng-show="participant_reports.report_details.length == 0"> <strong>Notification!</strong> <br>Please select an event to view its participant list. Click here to select event. </div>
+    <div class="col-xs-12" ng-show="participant_reports.report_details.length > 0">
+        <h4>Participants Reports</h4>
+        <table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name Last Name</th>
+                    <th>Phone</th>
+                    <th>Ticket Type</th>
+                    <th>Validation Date</th>
+                    <th>Block</th>
+                    <th>Seat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="participant in participant_reports.report_details">
+                    <td>{{participant.users.first_name}}&nbsp;{{participant.user.last_name}}</td>
+                    <td>{{participant.users.phone}}</td>
+                    <td>{{participant.price_type.name}}</td>
+                    <td>{{participant.events.event_schedule[0].start_date | date}}</td>
+                    <td>{{participant.venue_zone_section_seats.venue_zone_section.name}} &nbsp; {{participant.venue_zone_section_seats.venue_zone_section_row.name}}</td>
+                    <td>{{participant.venue_zone_section_seats.seat_number}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

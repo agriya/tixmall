@@ -1,0 +1,41 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 navbar-btn">
+                <div class="row pspace9">
+                    <h2 class="mb25 text-uppercase">{{'My orders'|translate}}</h2>
+                    <div class="clearfix">
+                        <div class="thumbnail transparency clearfix">
+                            <div class="col-sm-12 clrBoth" ng-repeat="myorder in myorders.details">
+                                <h3 class="pleft9"> ORDER <span>#{{myorder.id}}</span> </h3>
+                                <p class="h5 pleft9">{{myorder.created_at | moment:'dddd, D MMM YY'}}</p>
+                                <div class="row well no-border-rad order-block order-space" ng-repeat="order_item in myorder.order_items">
+                                    <div class="col-sm-4">
+                                        <p class="h5 no-mar">{{order_item.events.name}}</p>
+                                    </div>
+                                    <div class="well-sm visible-xs"></div>
+                                    <div class="col-sm-4">
+                                        <p class="no-mar">{{1}}x {{order_item.price_type.name}}</p>
+                                    </div>
+                                    <div class="well-sm visible-xs"></div>
+                                    <div class="col-sm-4">
+                                        <p class="no-mar">{{order_item.events.event_schedule[0].start_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</p>
+                                    </div>
+                                    <div class="well-sm visible-xs"></div>
+                                </div>
+                                <h5 class="pleft9">Total amount : <span>{{formatCurrency(myorder.total_amount) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>
+                                    <my-modal body="In order to cover the total cost of providing our Box Office Service we charge a Payment Handling Fee which is 2% of the total transaction value and a Transaction Processing Fee of £2.50 per ticket. For the {{order_item.events.name}} the transaction processing fee is £2.00 per ticket (except Advance Sale Promming tickets where it is £1.00 per ticket), up to a maximum of £25.00. Please note that different charges may apply when booking hospitality and some other events."
+                                        name="Include Fees"> <span class="text-danger">{{'Including fees'|translate}}</span></my-modal>
+                                </h5>
+                                <div class="well-sm clearfix pull-left mbot20"> <a href="#!/accounts/pastorders/{{myorder.id}}" class="btn custom-section text-uppercase btn-sm pull-left mright">VIEW</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

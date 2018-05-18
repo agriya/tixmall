@@ -1,0 +1,173 @@
+<div class="dashboard_summary">
+    <div class="row dashboard_custom_panel">
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-users fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminoverview.customers}}</div>
+                            <div>Total Users</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/users/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-book fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminoverview.active_events}}</div>
+                            <div>Active Events</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/events/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-shopping-cart fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminoverview.venue}}</div>
+                            <div>Total Venues</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/venues/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-usd fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminoverview.total_revenue}}</div>
+                            <div>Total Revenue</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="">
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="well-sm navbar-btn list-group-item-heading"></div>
+    <div class="row">
+        <div class="col-lg-8 dashboard_grid">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="col-lg-10"><i class="fa fa-line-chart"></i> Overview - {{rangeText}}</div>
+                    <div class="col-lg-2">
+                        <div class="btn-group pull-right"> <a class="btn btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+							  Filter
+							  <span class="caret"></span>
+							</a>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="range in rangeVal"><a href="#" ng-click="selectedRangeItem(range.key, range.value)">{{range.value}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group clearfix text-center">
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Users" class="pull-right" href="#/users/list"><i class="fa fa-share"></i></a>
+                            <h2 class="text-primary">{{adminstats.user_register}}</h2>
+                            <p>User Register</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Logins" class="pull-right" href="#/users/list"><i class="fa fa-share"></i></a>
+                            <h2 class="text-danger">{{adminstats.user_login}}</h2>
+                            <p>User Login</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Events" class="pull-right" href="#/events/list"><i class="fa fa-share"></i></a>
+                            <h2 class="text-info">{{adminstats.course_posted}}</h2>
+                            <p>Events Created</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Bookings" class="pull-right" href='#/orders/list'><i class="fa fa-share"></i></a>
+                            <h2 class="text-warning">{{adminstats.course_bookings}}</h2>
+                            <p>Events Booking</p>
+                        </li>
+                        <!--<li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Favorites" class="pull-right" href=""><i class="fa fa-share"></i></a>
+                            <h2 class="text-success">{{adminstats.course_favorites}}</h2>
+                            <p>Events Favourites</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Feedback" class="pull-right" href=""><i class="fa fa-share"></i></a>
+                            <h2 class="text-warning">{{adminstats.course_feedbacks}}</h2>
+                            <p>Events Feedbacks</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Transactions" class="pull-right" href=""><i class="fa fa-share"></i></a>
+                            <h2 class="text-success">{{adminstats.transactions}}</h2>
+                            <p>Transactions</p>
+                        </li>
+                        <li class="list-group-item clearfix col-md-4 col-xs-12 col-sm-6"> <a title="View All Events Flags" class="pull-right" href=""><i class="fa fa-share"></i></a>
+                            <h2 class="text-success">{{adminstats.course_flags}}</h2>
+                            <p>Events Flags</p>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-lg-4 dashboard_activities">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <i class="fa fa-clock-o"></i> Activities</div>
+                <!-- /.panel-heading -->
+        <!-- <div class="panel-body">
+                    <div class="list-group">
+                        <a href='' class="list-group-item"> <i class="glyphicon glyphicon-education"></i> Last Events Submitted<span ng-if="adminactivities.last_course_posted != null" class="pull-right text-muted small"><em>{{adminactivities.last_course_posted|timeago:timeZone}}</em></span>                            <span class="pull-right text-muted small" ng-if="adminactivities.last_course_posted == null"> - </span> </a>
+                        <a href='' class="list-group-item"> <i class="glyphicon glyphicon-usd"></i> Last Booking <span ng-if="adminactivities.last_booking != null" class="pull-right text-muted small"><em>{{adminactivities.last_booking|timeago:timeZone}}</em> </span> <span class="list-group-item"
+                                ng-if="adminactivities.last_booking == null"> - </span></a>
+                        <a href="" class="list-group-item"> <i class="fa fa-comment-o"></i> New Feedback <span ng-if="adminactivities.new_feedback != null" class="pull-right text-muted small"><em>{{adminactivities.new_feedback|timeago:timeZone}}</em></span> <span class="list-group-item"
+                                ng-if="adminactivities.new_feedback == null"> - </span></a>
+                        <a href='' class="list-group-item"> <i class="fa fa fa-user"></i> Last Register <span ng-if="adminactivities.last_register != null" class="pull-right text-muted small"><em>{{adminactivities.last_register|timeago:timeZone}}</em></span><span ng-if="adminactivities.last_register == null"
+                                class="pull-right text-muted small"> - </span> </a>
+                        <a href="" class="list-group-item"> <i class="fa fa-user-plus"></i> Last User Login <span ng-if="adminactivities.last_user_login != null" class="pull-right text-muted small"><em>{{adminactivities.last_user_login|timeago:timeZone}}</em></span> <span class="list-group-item"
+                                ng-if="adminactivities.last_user_login == null"> - </span></a>
+                        <a href="" class="list-group-item"> <i class="fa fa-heart"></i> Events Favourites<span ng-if="adminactivities.last_wishlist != null" class="pull-right text-muted small"><em>{{adminactivities.last_wishlist|timeago:timeZone}}</em></span><span class="list-group-item"
+                                ng-if="adminactivities.last_wishlist == null"> - </span></a>
+                    </div>
+                    <!-- /.list-group -->
+        <!-- /.panel-body -->
+        <!--  </div>
+            </div>
+            <div class="navbar-btn "></div>
+            <div class="panel panel-default">
+                <div class="panel-heading"> <i class="fa fa-globe"></i> Product</div>
+                <!-- /.panel-heading -->
+        <!--    <div class="panel-body">
+                    <div class="list-group">
+                        <div class="navbar-btn"><strong class="">Version v3.0b1</strong></div>
+                        <a href="http://customers.agriya.com/" target="_blank" class="list-group-item"> <i class="fa fa-caret-right"></i> Product Support</a> <a href="http://dev1products.dev.agriya.com/doku.php" target="_blank" class="list-group-item"><i class="fa fa-caret-right"></i> Product Manual </a> <a href="http://www.cssilize.com/"
+                            target="_blank" class="list-group-item"><i class="fa fa-caret-right"></i> CSSilize PSD to XHTML Conversion and theming</a>
+                        <a href="http://blogs.agriya.com/" target="_blank" class="list-group-item"> <i class="fa fa-caret-right"></i> Agriya Blog Follow Agriya news</a>
+                    </div>
+                    <!-- /.list-group -->
+        <!-- /.panel-body -->
+        <!--    </div>
+            </div>
+            <div class="navbar-btn "></div>
+        </div>-->
+        <div class="navbar-btn "></div>
+    </div>
+</div>
+</div>

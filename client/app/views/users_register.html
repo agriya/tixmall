@@ -1,0 +1,234 @@
+<div class="section pr">
+    <div class="cover-image" style="background-image : url('../images/login-bg.jpg')"></div>
+</div>
+<div class="section register-block">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-btn fa-inverse">
+                <h2>{{'REGISTER'|translate}}</h2>
+                <form class="form-horizontal form-alter" role="form" name="userSignup" ng-submit="save(userSignup)" novalidate autocomplete="off">
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.title.$dirty && userSignup.title.$invalid || (userSignup.$submitted && userSignup.title.$invalid) }">
+                        <div class="col-sm-3"> <label for="title" class="control-label">{{'Title' | translate}}
+                                        <span class="text-danger ml5">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <select class="form-control title-span" id="title" ng-model="vm.user.title" ng-options="titles.name as titles.name for titles in titles" name="title" ng-required="true">
+                                    <option value="">{{'Select'|translate}}</option>
+                            </select>
+                            <div class="help-block text-danger" ng-if="userSignup.title.$dirty || userSignup.$submitted" ng-messages="userSignup.title.$error" role="alert">
+                                <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.first_name.$dirty && userSignup.first_name.$invalid || (userSignup.$submitted && userSignup.first_name.$invalid) }">
+                        <div class="col-sm-3"> <label for="first_name" class="control-label">{{'First Name'|translate}}
+                                        <span class="text-danger ml5">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.user.first_name" ng-pattern="GeneralConfig.userNamePattern" class="form-control" name="first_name" id="first_name" placeholder="{{'First Name'|translate}}" ng-minlength="3" ng-maxlength="30" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.first_name.$dirty || userSignup.$submitted" ng-messages="userSignup.first_name.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="minlength">{{'Your name is too short'|translate}}.</div>
+                                <div ng-message="maxlength">{{'Your name is too long'|translate}}.</div>
+                                <div ng-message="pattern">{{'First character shouldn\'t starts with number or special character and spaces not allowed between characters' |translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.last_name.$dirty && userSignup.last_name.$invalid || (userSignup.$submitted && userSignup.last_name.$invalid) }">
+                        <div class="col-sm-3"> <label for="last_name" class="control-label">{{'Last Name'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.user.last_name" ng-pattern="GeneralConfig.userNamePattern" class="form-control" name="last_name" id="last_name" placeholder="{{'Last Name'|translate}}" ng-minlength="3" ng-maxlength="30" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.last_name.$dirty || userSignup.$submitted" ng-messages="userSignup.last_name.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="minlength">{{'Your name is too short'|translate}}.</div>
+                                <div ng-message="maxlength">{{'Your name is too long'|translate}}.</div>
+                                <div ng-message="pattern">{{'First character shouldn\'t starts with number or special character and spaces not allowed between characters' |translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': (userSignup.phone_code.$dirty && userSignup.phone_code.$invalid) || (userSignup.phone.$dirty && userSignup.phone.$invalid) || (userSignup.$submitted && userSignup.phone_code.$invalid) || (userSignup.$submitted && userSignup.phone.$invalid) }">
+                        <div class="col-sm-3"> <label for="contact" class="control-label">{{'Mobile Number'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-sm-6"> <select name="phone_code" id="phone_code" class="form-control" ng-model="vm.user.phone_code" ng-init="vm.user.phone_code = '93        '" ng-options="country.phone as country.phone for country in countries" ng-required="true">
+                                                <option value="">{{'Select'|translate}}</option>
+                                            </select>
+                                    <div class="help-block text-danger" ng-if="userSignup.phone_code.$dirty || userSignup.$submitted" ng-messages="userSignup.phone_code.$error" role="alert">
+                                        <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6"> <input class="form-control" name="phone" ng-model="vm.user.phone" type="text" placeholder="{{'Eg.51896'|translate}}" ng-pattern="GeneralConfig.phoneNumberPattern" ng-required="true">
+                                    <div class="help-block text-danger"
+                                        ng-if="userSignup.phone.$dirty || userSignup.$submitted" ng-messages="userSignup.phone.$error" role="alert">
+                                        <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                        <div ng-message="pattern">{{'Valid number is required'|translate}}.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.mobile.$dirty && userSignup.mobile.$invalid || (userSignup.$submitted && userSignup.mobile.$invalid)}">
+                        <div class="col-sm-3"> <label for="mobile" class="control-label">{{'Landline Number'|translate}}
+                                    <span class="text-danger ml5">&nbsp;*</span>
+                                </label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.user.mobile" class="form-control" name="mobile" id="mobile" placeholder="{{'Mobile Number'|translate}}" ng-pattern="GeneralConfig.phoneNumberPattern" ng-required="true">
+                            <div class="help-block text-danger"
+                                ng-if="userSignup.mobile.$dirty || userSignup.$submitted" ng-messages="userSignup.mobile.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="pattern">{{'Valid number is required'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.country_id.$dirty && userSignup.country_id.$invalid || (userSignup.$submitted && userSignup.country_id.$invalid) }">
+                        <div class="col-sm-3"> <label for="nationality" class="control-label">{{'Nationality'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <select name="country" id="country_id" name="country_id" class="form-control" ng-model="vm.user.country_id" ng-init="vm.user.country_id = 238" ng-options="country.id as country.name for country in countries" ng-required="true">
+                                <option value="">{{'Select'|translate}}</option>
+                            </select>
+                            <div class="help-block text-danger" ng-if="userSignup.country_id.$dirty || userSignup.$submitted" ng-messages="userSignup.country_id.$error" role="alert">
+                                <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.residence_country_id.$dirty && userSignup.residence_country_id.$invalid || (userSignup.$submitted && userSignup.residence_country_id.$invalid) }">
+                        <div class="col-sm-3"> <label for="residence_country_id" class="control-label">{{'Country Of Residence'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <select name="currency_code" id="residence_country_id" name="residence_country_id" class="form-control" ng-model="vm.user.residence_country_id" ng-init="vm.user.residence_country_id = 238" ng-options="country.id as country.name for country in countries"
+                                ng-required="true">
+                                    <option value="">{{'Select'|translate}}</option>
+                            </select>
+                            <div class="help-block text-danger" ng-if="userSignup.residence_country_id.$dirty || userSignup.$submitted" ng-messages="userSignup.residence_country_id.$error" role="alert">
+                                <div ng-message="required">{{'Please select a value for this field'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"> <label for="residence" class="control-label">{{'DOB'|translate}}
+                                        <span class="text-danger">&nbsp;</span>
+                                    </label> </div>
+                        <div class="col-sm-9">
+                            <p class="input-group calendar-align" style="width: 250px"> <input type="text" class="form-control" readonly uib-datepicker-popup="dd MMMM yyyy" ng-model="vm.events.startsAt" is-open="vm.events.startOpen" datepicker-options="options" close-text="Close"> <span class="input-group-btn">
+                                        <button
+                                            type="button"
+                                            class="btn btn-danger"
+                                            custom-class="datepicker-class"
+                                            ng-click="vm.toggle($event, 'startOpen', vm.events)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                        </span> </p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.email.$dirty && userSignup.email.$invalid || (userSignup.$submitted && userSignup.email.$invalid)}">
+                        <div class="col-sm-3"> <label for="email" class="control-label">{{'E-mail'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="email" ng-model="vm.user.email" class="form-control" id="email" name="email" placeholder="E-mail" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.email.$dirty || userSignup.$submitted" ng-messages="userSignup.email.$error"
+                                role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="email">{{'This field must be a valid email address'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.confirm_email.$dirty && userSignup.confirm_email.$invalid || (userSignup.$submitted && userSignup.confirm_email.$invalid)}">
+                        <div class="col-sm-3"> <label for="confirm_email" class="control-label">{{'Confirm-mail'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="email" match="vm.user.email" ng-model="confirm_email" class="form-control" id="confirm_email" name="confirm_email" placeholder="Confirm-mail" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.confirm_email.$dirty || userSignup.$submitted"
+                                ng-messages="userSignup.confirm_email.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="email">{{'This field must be a valid email address'|translate}}.</div>
+                                <div ng-message="mismatch">{{'Email and confirm email must match'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.username.$dirty && userSignup.username.$invalid || (userSignup.$submitted && userSignup.username.$invalid)}">
+                        <div class="col-sm-3"> <label for="username" class="control-label">{{'Username'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="text" ng-model="vm.user.username" class="form-control" name="username" id="username" placeholder="Username" ng-pattern="GeneralConfig.userNamePattern" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.username.$dirty || userSignup.$submitted"
+                                ng-messages="userSignup.username.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="pattern">{{'First character shouldn\'t starts with number or special character and spaces not allowed between characters' |translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.password.$dirty && userSignup.password.$invalid || (userSignup.$submitted && userSignup.password.$invalid) }">
+                        <div class="col-sm-3"> <label for="password" class="control-label">{{'Password'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="password" ng-model="vm.user.password" class="form-control" id="password" name="password" placeholder="Password" ng-maxlength="15" ng-minlength="6" ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()"
+                                ng-paste="$event.preventDefault()" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.password.$dirty || userSignup.$submitted" ng-messages="userSignup.password.$error" role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="minlength">{{'Password should be atleast 6 characters'|translate}}.</div>
+                                <div ng-message="maxlength">{{'Password can\'t exceed 15 characters'|translate}}.</div>
+                            </div>
+                            <div class="col-md-12 no-space">
+                                <div class="col-md-5 col-xs-6 no-space">
+                                    <div class="progress progress-slim navbar-btn list-group-item-text no-border-rad">
+                                        <div ng-password-strength="vm.user.password" strength="passStrength" calculation-mode="formula" goal="96" inner-class="progress-bar" inner-class-prefix="progress-bar-"> </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-xs-6  text-left">
+                                    <h5 class="mt7">{{'Strength:'|translate}}</h5>
+                                </div>
+                            </div>
+                            <h6 class="list-group-item-text"><a href="javascript:void(0);" class="text-danger" ng-click="isOpen = !isOpen">{{'What\'s this'|translate}}</a></h6>
+                            <div class="collapse" uib-collapse="!isOpen">
+                                <div class="well-sm"></div>
+                                <p>{{'For a secure password, ensure it\'s at least 6 characters long and use a mixture of:'|translate}}</p>
+                                <ul>
+                                    <li>{{'Uppercase and lowercase characters'|translate}}</li>
+                                    <li>{{'Numbers'|translate}}</li>
+                                    <li>{{'Special characters'| translate}} (!@#$%^&*?_~)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': userSignup.confirm_password.$dirty && userSignup.confirm_password.$invalid || (userSignup.$submitted && userSignup.confirm_password.$invalid) }">
+                        <div class="col-sm-3"> <label for="confirm_password" class="control-label">{{'Repeat Password'|translate}}
+                                        <span class="text-danger">&nbsp;*</span>
+                                    </label> </div>
+                        <div class="col-sm-9"> <input type="password" class="form-control" ng-model="confirm_password" name="confirm_password" id="confirm_password" placeholder="Repeat Password" ng-minlength="6" ng-maxlength="15" ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()"
+                                ng-paste="$event.preventDefault()" match="vm.user.password" ng-required="true">
+                            <div class="help-block text-danger" ng-if="userSignup.confirm_password.$dirty || userSignup.$submitted" ng-messages="userSignup.confirm_password.$error"
+                                role="alert">
+                                <div ng-message="required">{{'Please enter a value for this field'|translate}}.</div>
+                                <div ng-message="minlength">{{'Password should be atleast 6 characters'|translate}}.</div>
+                                <div ng-message="mismatch">{{'Password and Confirm password must match'|translate}}.</div>
+                                <div ng-message="maxlength">{{'Password can\'t exceed 15 characters'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">&nbsp;</div>
+                        <div class="col-sm-9">
+                            <div class="checkbox"> <label>
+                                            <input type="checkbox" ng-model="vm.user.is_agree_terms_conditions" name="is_agree_terms_conditions" id="is_agree_terms_conditions" ng-required="true">{{'I have read and accepted the'|translate}} <a href="#!/pages/2/terms-and-conditions" target="_blank" class="text-danger">{{'Terms and conditions'|translate}}</a> {{'and'|translate}} <a href="#!/pages/1/privacy-policy" class="text-danger" target="_blank">{{'Privacy policy'|translate}}</a></label>                                </div>
+                            <div class="help-block" ng-if="userSignup.is_agree_terms_conditions.$dirty || userSignup.$submitted" ng-messages="userSignup.is_agree_terms_conditions.$error" role="alert">
+                                <div ng-message="required" class="text-danger">{{'Please enter a value for this field'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">&nbsp;</div>
+                        <div class="col-sm-9">
+                            <div vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()"></div>
+                            <div class="help-block text-danger" ng-if="userSignup.$submitted" role="alert">
+                                <div ng-show="captchaVerified === false" class="text-danger">{{'Please verify captcha'|translate}}.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group text-right m-r-0"> <button type="submit" ng-disabled="save_btn" class="btn btn-danger">{{'Register'|translate}}</button> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

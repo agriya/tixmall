@@ -1,0 +1,50 @@
+<div id="container" class="sales-report">
+    <reports-filter callback="sales_reports.refreshFilters(filter)" type="sales"></reports-filter>
+    <div class="row" ng-show="sales_reports.report_details.sales_report.length > 0">
+        <div class="stats">
+            <div class="col-xs-12">
+                <div class="col-sm-6 text-center">
+                    <div class="bg-info well-sm">
+                        <div class="navbar-btn"></div>
+                        <h2 class="fa-inverse">{{sales_reports.total_details.total_quantity}}</h2>
+                        <h6 class="fa-inverse">TOTAL QUANTITY</h6>
+                        <div class="navbar-btn"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <div class="bg-warning well-sm">
+                        <div class="navbar-btn"></div>
+                        <h2 class="fa-inverse">{{sales_reports.total_details.total_revenue}} TL</h2>
+                        <h6 class="fa-inverse">TOTAL REVENUE</h6>
+                        <div class="navbar-btn"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-info " ng-show="sales_reports.report_details.sales_report.length == 0"> <strong>Notification</strong> <br> No results found. </div>
+    <div class="well-sm xs-hidden"></div>
+    <div class="row">
+        <div class="col-xs-12 table-responsive sales-report-filter" ng-show="sales_reports.report_details.sales_report.length > 0">
+            <h4 class="sep-border text-uppercase">Sales Reports</h4>
+            <table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th width="110" class="centered">Sales Quantity</th>
+                        <th width="110">Revenue</th>
+                        <th width="70"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="sales in sales_reports.report_details.sales_report">
+                        <td>{{sales.created_at|date}}</td>
+                        <td class="text-center">{{sales.quantity}}</td>
+                        <td class="text-center">{{sales.total_amount}}</td>
+                        <td class="text-center"><span class="edit-button"><a ui-sref="sales_detailed_reports({start_date:sales.created_at,end_date:sales.created_at})" class="btn btn-default" title="Saturdayı">Details</a></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

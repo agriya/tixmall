@@ -1,0 +1,155 @@
+<div class="section pr fixed-banner">
+    <div class="cover-image" style="background-image : url('../images/login-bg.jpg')"></div>
+</div>
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row pspace9">
+            <div class="clearfix text-center">
+                <ul class="breadcrumb list-group-item-text">
+                    <li> <span>{{'CHOOSE TICKET'|translate}}</span> </li>
+                    <li class="active"> <strong>
+                  <span>{{'YOUR BASKET'|translate}}</span>
+                </strong> </li>
+                    <li class=""> <span>{{'DELIVERY METHOD'|translate}}</span> </li>
+                    <li class=""> <span>{{'PAYMENT'|translate}}</spana> </li>
+                    <li class=""> <span>{{'CONFIRMATION'|translate}}</span> </li>
+                </ul>
+            </div>
+            <div ng-show="Cart.getTotalItems() > 0" class="booking-basket-block">
+                <div class="clearfix">
+                    <div class="well-sm"></div>
+                    <div class="col-sm-6 col-xs-6">
+                        <h3 class="navbar-btn row text-uppercase">{{'your shopping basket'|translate}}</h3>
+                    </div>
+                    <div class="col-sm-6  col-xs-6 text-right"> <img src="../images/ticketing-secure-badge.png" class="img-responsive pull-right navbar-btn row" alt="secure booking"> </div>
+                </div>
+                <div class="clearfix">
+                    <div clas="row">
+                        <div class="col-sm-12 bg-danger border-top-side  hidden-xs">
+                            <div class="col-sm-6 well-sm text-sm-center"> <strong>Item(s)</strong> </div>
+                            <div class="col-sm-2 well-sm text-sm-center"> <strong>{{'Quantity'|translate}}</strong> </div>
+                            <div class="col-sm-2 well-sm text-sm-center"> <strong>{{'Price'|translate}}</strong> </div>
+                            <div class="col-sm-2 well-sm text-sm-center"> <strong>{{'Total'|translate}}</strong> </div>
+                        </div>
+                    </div>
+                    <div clas="row">
+                        <div class="col-sm-12 border-top-side" ng-repeat="item in Cart.getCart().items track by $index">
+                            <div class="col-sm-6 well-sm media">
+                                <div class="text-xs-right text-sm-left well-sm pull-left hidden-xs"> <span ng-click="Cart.removeItemById(item.getId(), 'clear')" class="cursor-pointer"><i class="fa fa-times-circle text-danger"></i></span> </div>
+                                <div class="text-xs-right text-sm-left well-sm visible-xs xs-float-right"><span ng-click="Cart.removeItemById(item.getId(), 'clear')" class="cursor-pointer"><i class="fa fa-times-circle text-danger"></i></span> </div>
+                                <div class="media-body">
+                                    <div class="navbar-btn"></div>
+                                    <h3 class="list-group-item-heading text-uppercase"> <b>{{item.getName()}}</b> </h3>
+                                    <ul class="list-unstyled ">
+                                        <li ng-show="item.getName() !== 'Gift Voucher'">
+                                            <p class="list-group-item-heading" ng-show="item.getDatat().event_start_date"> <small>{{item.getDatat().event_start_date | moment:'dddd, DD MMM YYYY hh:mm A'}} - {{item.getDatat().event_end_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</small> </p>
+                                        </li>
+                                        <li ng-show="item.getName() !== 'Gift Voucher'">
+                                            <p class="list-group-item-heading" ng-show="item.getData().zone_name"> <small>{{item.getData().zone_name}},&nbsp;{{item.getData().venue_zone_section_name}},&nbsp;{{'Row'|translate}}&nbsp;{{item.getData().venue_zone_section_row_name}},&nbsp;{{'Seat'|translate}}&nbsp;{{item.getData().seat_name}}</small></p>
+                                        </li>
+                                        <li ng-show="item.getName() !== 'Gift Voucher'">
+                                            <p class="list-group-item-heading"> <small>{{item.getQuantity()}}x {{item.getData().price.name}}</small> </p>
+                                        </li>
+                                    </ul>
+                                    <div ng-if="$last"> <a class="btn btn-danger btn-sm text-uppercase navbar-btn hide">{{'add a meet and greet'|translate}}</a> <a class="btn btn-danger btn-sm text-uppercase navbar-btn hide">{{'add a valet parking'|translate}}</a> <a class="btn btn-danger btn-sm text-uppercase navbar-btn hide">add a reservation restaurant</a>
+                                        <div class="well-lg"></div>
+                                        <p>{{'Tickets(s)'|translate}}&nbsp; <a href="#!/pages/2/terms-and-conditions" class="text-danger "><span>{{'Terms and Condtions'|translate}}</span></a>&nbsp;{{'apply to your tickets'|translate}}.</p>
+                                        <p>{{'Restricted Viewing'|translate}}.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 well-sm text-sm-center"> <span>
+                        <strong class="visible-xs col-xs-2 price_details row">{{'Quantity'|translate}}:&nbsp;</strong>{{item.getQuantity()}}</span> </div>
+                            <div class="col-sm-2 well-sm text-sm-center"> <span>
+                        <strong class="visible-xs col-xs-2 price_details row">{{'Price'|translate}}:&nbsp;</strong>{{formatCurrency(item.getPrice()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                            <div class="col-sm-2 well-sm text-sm-center">
+                            <span>
+                        <strong class="visible-xs col-xs-2 price_details row">{{'Total'|translate}}:&nbsp;</strong>{{formatCurrency(item.getTotal()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                        </div>
+                        <!-- doantion amount -->
+                        <div class="col-sm-12 border-top-side" ng-if="Cart.getDonationAmount() !== 0">
+                            <div class="col-sm-6 well-sm media">
+                                <div class="text-xs-right text-sm-left well-sm pull-left hidden-xs p-t-0 "> <span ng-click="Cart.setDonationAmount(0)" class="cursor-pointer"><i class="fa fa-times-circle text-danger"></i></span> </div>
+                                <div class="text-xs-right text-sm-left well-sm visible-xs xs-float-right"><span ng-click="Cart.setDonationAmount(0)" class="cursor-pointer"><i class="fa fa-times-circle text-danger"></i></span> </div>
+                                <div class="media-body">
+                                    <h3 class="list-group-item-heading text-uppercase"> <b>{{'General Donation'|translate}}</b> </h3>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 well-sm clrBoth"> <span>
+                            <strong class="visible-xs col-xs-2 price_details row">{{'Quantity'|translate}}:&nbsp;</strong></span> </div>
+                            <div class="col-sm-2 well-sm clrBoth"> <span>
+                            <strong class="visible-xs col-xs-2 price_details row">{{'Price'|translate}}:&nbsp;</strong>{{formatCurrency(Cart.getDonationAmount()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                            <div
+                                class="col-sm-2 well-sm clrBoth"> <span>
+                            <strong class="visible-xs col-xs-2 price_details row">{{'Total'|translate}}:&nbsp;</strong>{{formatCurrency(Cart.getDonationAmount()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </div>
+                    </div>
+                </div>
+                <div clas="row">
+                    <div class="col-sm-12 border">
+                        <div class="navbar-btn"></div>
+                        <div class="col-sm-6 well-sm">
+                            <h3 class="list-group-item-heading "> <b class="text-uppercase">{{'STANDARD HANDLING FEE'|translate}}</b>&nbsp; <small>
+                             <my-modal body="In order to cover the total cost of providing our Box Office Service we charge a Payment Handling Fee which is 2% of the total transaction value and a Transaction Processing Fee of £2.50 per ticket. For the BBC Proms the transaction processing fee is £2.00 per ticket (except Advance Sale Promming tickets where it is £1.00 per ticket), up to a maximum of £25.00. Please note that different charges may apply when booking hospitality and some other events." name="Standard Handling Fees"><span class="text-danger">{{'WHAT\'S THIS?'|translate}}</span></my-modal>
+                        </small> </h3>
+                        </div>
+                        <div class="col-sm-2 well-sm hidden-xs">&nbsp;</div>
+                        <div class="col-sm-2 well-sm hidden-xs">&nbsp;</div>
+                        <div class="col-sm-2 well-sm text-sm-center"> <span>
+                        <strong class="visible-xs col-xs-2 price_details row">{{'Price'|translate}}:&nbsp;</strong>{{formatCurrency(((2/100)*Cart.totalCost())* Cart.getTotalItems()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span>                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" ng-show="donated">
+                <div class="well-sm"></div>
+                <div role="alert" class="alert alert-success alert-dismissable list-group-item-text "> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {{'Thank your for your kind donation'|translate}}. </div>
+            </div>
+            <div class="well-sm"></div>
+            <div class="clearfix thumbnail">
+                <div class="col-sm-7 navbar-btn">
+                    <h3 class="list-group-item-heading text-uppercase"> <b>{{'Donate to the cause'|translate}}</b> </h3> <span>{{'please add a gift of any size to our cause to support those in need. Your
+                    vital support will be invested into building a future through investment
+                    in education for children in need. We highly thank you and appreciate your
+                    generously & support'|translate}}.</span> </div>
+                <div class="col-sm-5 text-md-right navbar-btn form-alter">
+                    <p>{{'Please select your donation amount and click DONATE'|translate}}</p>
+                    <form name="donation"> <select class="donate" name="donate" id="donation_amt" ng-options="donation_amount.id as (formatCurrency(donation_amount.amount)|currency : selectedCurrency.currency_symbol : GeneralConfig.fraction) for donation_amount in booking_basket.donation_amounts"
+                            ng-model="donation_amount_id">                	
+                            </select> <a class="btn btn-danger btn-sm text-uppercase" ng-click="booking_basket.donate(donation_amount_id)">{{'DONATE'|translate}}</a> </form>
+                </div>
+            </div>
+            <div class="text-right"> <span class="text-muted h4">
+                <b>{{'Basket Total'|translate}}:
+                    <span class="fa-inverse">&nbsp;{{formatCurrency((((2/100)*Cart.totalCost()) * Cart.getTotalItems() + Cart.totalCost()) + Cart.getDonationAmount()) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> </b>
+                </span>
+                <div class="navbar-btn"></div>
+            </div>
+        </div>
+        <div ng-show="Cart.getTotalItems() === 0">
+            <div class="well-sm"></div>
+            <div class="bg-danger well-sm"> <span>{{'Your basket is currently empty'|translate}}.</span> </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12 text-xs-center" ng-show="Cart.getTotalItems()> 0">
+                <div class="pull-left xs-float-none mbot20"> <a class="btn custom-section btn-sm" ng-click="booking_basket.ClearCart()">{{'CANCEL ORDER'|translate}}</a> </div>
+                <div class="pull-right xs-float-none"> <a href="#!/events" class="btn custom-section btn-sm text-uppercase">{{'continue shopping'|translate}}</a> <a class="btn btn-danger btn-sm text-uppercase" ng-click="booking_basket.proceedToCheckout()">{{'proceed to checkout'|translate}}</a>                    </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-sm-12 text-sm-right" ng-show="Cart.getTotalItems() === 0"> <a class="btn btn-danger btn-sm text-uppercase" href="#!/events">{{'CONTINUE SHOPPING'|translate}}</a> </div>
+        </div>
+    </div>
+</div>
+<!-- You may also interserted in block start -->
+<div class="section latest-news" ng-show="Cart.getTotalItems()> 0 && booking_basket.interested_in.length > 0">
+    <div class="container">
+        <div class="row">
+            <h3 class="fa-inverse">{{'YOU MAY ALSO INTERESTED IN'|translate}} ...</h3>
+            <div class="navbar-btn clearfix latest-news-block">
+                <div class="col-sm-4 col-xs-12 inner-block" ng-repeat="interested in booking_basket.interested_in"> <a href="#!/event/{{interested.id}}/{{interested.slug}}"><img ng-src="{{interested.image_name}}" alt="{{interested.name}}" title="{{interested.name}}" class="center-block img-responsive mob-mbot"></a> </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- You may also interserted in block end -->
+</div>
+<!-- END: shopping basket -->

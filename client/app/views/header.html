@@ -1,0 +1,88 @@
+<div class="navbar navbar-static-top list-group-item-text no-border" ng-controller="HeaderCtrl as model">
+    <div class="container-fluid header-max">
+        <div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar btn-toggle"></span>
+                        <span class="icon-bar btn-toggle"></span>
+                        <span class="icon-bar btn-toggle"></span>
+                    </button>
+            <!-- to show header items under sm-devices above collapse icon-->
+            <ul class="nav fa-inverse navigation-alter menu-none cart-blk">
+                <li class="fa-inverse" ng-if="!isAuth"> <a href="#!/users/register" class="dropdown-toggle text-sm mright" data-toggle="dropdown">{{'Create a Tixmall Account'|translate}}</a> </li>
+                <li><a href="#"><img src="../images/search-icon.png" /></a></li>
+                <!--
+                <li class="h6 cart-icon"> <span>
+                                            <a class="btn btn-danger dropdown-toggle pspace mright" href="#!/booking/basket" data-toggle="dropdown"><i class="fa fa-fw fa-shopping-cart"></i><span class="badge" ng-show="Cart.getTotalItems() > 0">{{Cart.getTotalItems()}}</span></a>
+                    </span>
+                </li>
+                -->
+                <li class="" ng-if="!isAuth"> <a href="#!/users/login" class="dropdown-toggle text-sm" data-toggle="dropdown"> {{'Sign In'|translate}}</a> </li>
+                <li class="" ng-if="isAuth"> <a data-toggle="dropdown" id="dropdownMenu3" class="dropdown-toggle mright width-100"> <img src="../images/userimg-icon.png" /> <span class="label">{{'My Details'|translate}}</span><span class="fa fa-chevron-down"></span>                    </a>
+                    <ul class="dropdown-menu space-top-0 space-btom-0" aria-labelledby="dropdownMenu3">
+                        <li> <a href="#!/users/settings">
+                                                            {{'My Details'|translate}}
+                                                        </a> </li>
+                        <li> <a href="#!/users/change_password">
+                                                            {{'Change Password'|translate}}
+                                                        </a> </li>
+                        <li> <a href="#!/account/checkgiftcertificate">
+                                                            {{'Gift Vouchers'|translate}}
+                                                        </a> </li>
+                        <li> <a href="#!/accounts/cards">{{'Managed Saved Cards'|translate}}</a> </li>
+                        <li> <a href="#!/accounts/pastorders">{{'My Orders'|translate}}</a> </li>
+                        <li class="divider"></li>
+                        <li> <a href="#!/users/logout">
+                                                            {{'Log out'|translate}}
+                                                        </a> </li>
+                    </ul>
+                </li>
+            </ul> <a class="navbar-brand mt5" href="#"><img height="30" title="Tixmall" alt="Brand" src="../images/logo.png"></a> </div>
+        <div class="collapse navbar-collapse header-menu" id="navbar-ex-collapse">
+            <ul class="nav navbar-nav navbar-left fa-inverse">
+                <li class="fa-inverse h6 dropdown hdrlang" role="presentation" languages></li>
+                <li class="h6 hdrcurry"> <a class="h6 list-group-item-heading list-group-item-text show dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2"> {{$root.selectedCurrency.currency_code}} 
+                                	<span class="fa fa-chevron-down"></span>
+                                </a>
+                    <ul class="dropdown-menu space-top-0 space-btom-0" aria-labelledby="dropdownMenu2" ng-show="countries.length > 0">
+                        <li class="h6" ng-repeat="currency in currency_codes"> <a href="" ng-click="dropdownItemSelected(currency, 'currency')">{{currency.currency_code}}</a> </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active h6"> <a href="#!/events">{{'Events'|translate}}</a> </li>
+                <li class="active h6"> <a href="#!/booking/basket">{{'My cart'|translate}}</a> </li>
+                <li class="active h6"> <a href="#!/events">{{'Latest events'|translate}}</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right well-sm fa-inverse cart-blk hidden-menu">
+                <li class="fa-inverse" ng-if="!isAuth"> <a href="#!/users/register" class="dropdown-toggle mright" data-toggle="dropdown">{{'Create a Tixmall Account'|translate}}</a> </li>
+                <!--
+                <li class="h6 cart-icon"> <span>
+                                <a class="btn btn-danger dropdown-toggle pspace mright" href="#!/booking/basket" data-toggle="dropdown"><i class="fa fa-fw fa-shopping-cart"></i><span class="badge" ng-show="Cart.getTotalItems() > 0">{{Cart.getTotalItems()}}</span></a>
+                    </span>
+                </li>
+                -->
+                <li><a href="#!/events"><img src="../images/search-icon.png" /></a></li>
+                <li class="" ng-if="!isAuth"> <a href="#!/users/login" class="dropdown-toggle" data-toggle="dropdown"> {{'Sign In'|translate}}</a> </li>
+                <li class="" ng-if="isAuth"> <a data-toggle="dropdown" id="dropdownMenu3" class="dropdown-toggle mright width-100"> <img src="../images/userimg-icon.png" /> <span class="label">{{'My Details'|translate}}</span><span class="fa fa-chevron-down"></span>                    </a>
+                    <ul class="dropdown-menu space-top-0 space-btom-0" aria-labelledby="dropdownMenu3">
+                        <li> <a href="#!/users/settings">
+                                                {{'My Details'|translate}}
+                                            </a> </li>
+                        <li> <a href="#!/users/change_password">
+                                                {{'Change Password'|translate}}
+                                            </a> </li>
+                        <li> <a href="#!/account/checkgiftcertificate">
+                                                {{'Gift Vouchers'|translate}}
+                                            </a> </li>
+                        <li> <a href="#!/accounts/cards">{{'Managed Saved Cards'|translate}}</a> </li>
+                        <li> <a href="#!/accounts/pastorders">{{'My Orders'|translate}}</a> </li>
+                        <li class="divider"></li>
+                        <li> <a href="#!/users/logout">
+                                                {{'Log out'|translate}}
+                                            </a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

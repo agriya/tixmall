@@ -1,0 +1,152 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="venue-image-level fa-inverse">
+                <div class="clearfix text-center navbar-btn">
+                    <ul class="breadcrumb list-group-item-text no-border-rad">
+                        <li class="active"><strong>{{'CHOOSE TICKETS'|translate}}</strong> </li>
+                        <li> <span><img src="../images/breadcrumb-right.png" alt="Right" title="Right" /></span><span>{{'YOUR BASKET'|translate}}</span> </li>
+                        <li class=""> <span><img src="../images/breadcrumb-right.png" alt="Right" title="Right" /></span><span>{{'DELIVERY METHOD'|translate}}</span> </li>
+                        <li class=""> <span><img src="../images/breadcrumb-right.png" alt="Right" title="Right" /></span><span>{{'PAYMENT'|translate}}</span> </li>
+                        <li class=""> <span><img src="../images/breadcrumb-right.png" alt="Right" title="Right" /></span><span>{{'CONFIRMATION'|translate}}</span> </li>
+                    </ul>
+                </div>
+                <h3 class="list-group-item-text text-uppercase">{{model.chooseSeat.Event[0].name}}</h3> <span>
+                    <span class="pull-left"><a href="#!/eventschedule/{{model.chooseSeat.Event[0].id}}/{{model.chooseSeat.Event[0].slug}}"><img class="fa-fw" src="../images/banner-icon-1-calendar.png"></a> </span> <strong><small>&nbsp;{{model.chooseSeat.EventSchedule[0].start_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</small></strong></span>
+                <div class="well-sm"></div>
+            </div>
+            <div class="col-xs-12 bg-danger text-center fa-inverse screen-details"><a href="#!/events/{{event_id}}/{{venue_id}}/choose-tickets/{{model.chooseSeat.EventSchedule[0].id}}" class="btn btn-default btn-sm pull-left navbar-btn back-btn">{{'BACK'|translate}}</a>
+                <h4 class="pspace5"><span class="text-center text-uppercase">{{zone_name}}</span></h4>
+            </div>
+            <div class="col-md-12 text-center loader-image">
+                <div class="loader-style"><img src="../images/loader.gif" alt="Loader" title="Loader" /></div>
+            </div>
+            <div class="venue-images side-border">
+                <div class="col-md-9 col-sm-8 nav pr">
+                    <div class="select-seat-panel clearfix">
+                        <ul class="list-inline pull-right">
+                            <li class="ticket-available"><span class="text-danger pull-left"><i class="fa fa-square-o fa-2x fa-fw"></i></span> <span>- {{'Available'|translate}}</span></li>
+                            <li class="ticket-purchased"><span class="text-danger pull-left"><i class="fa fa-square fa-2x fa-fw"></i></span> <span>- {{'Purchased'|translate}}</span></li>
+                            <li class="ticket-selected"><span class="text-success pull-left"><i class="fa fa-square fa-2x fa-fw"></i></span> <span>- {{'Selected'|translate}}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12">
+                        <div id="example1" class="controls seat-allocations">
+                            <div class="clearfix ps">
+                                <div class="pull-left">
+                                    <div class="controls-pan controls-zoom"> <span class="up-arr js-image-up"> <img src="../images/seat-up.png" alt="Up" title="Up" /></span> <span class="left-arr js-image-left"> <img src="../images/seat-left.png" alt="Left" title="Left" /> </span> <span class="home-arr js-image-reset"> <img src="../images/seat-home.png" alt="Home" title="Home" /></span>                                        <span class="right-arr js-image-right"> <img src="../images/seat-right.png" alt="Right" title="Right" /></span> <span class="down-arr js-image-down"> <img src="../images/seat-down.png" alt="Down" title="Down" /></span>
+                                        <!--<span><i class="btn bg-danger fa fa-arrow-up js-image-up"></i></span>
+                                    <span><i class="btn bg-danger fa fa-arrow-left js-image-left"></i></span> 
+                                        <span><i class="btn bg-danger fa fa-home js-image-reset"></i></span>
+                                        <span><i class="btn bg-danger fa fa-arrow-right js-image-right"></i> </span>--></div>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="controls-pan controls-zoom"> <span class="plus-arr js-image-zoomin"><img src="../images/seat-plus.png" alt="Plus" title="Plus" /></span> <span class="minus-arr js-image-zoomout"><img src="../images/seat-minus.png" alt="Minus" title="Minus" /></span>
+                                        <!--<span><i class="btn bg-danger fa fa-plus js-image-zoomin"></i> </span>
+                                <span><i class="btn bg-danger fa fa-minus js-image-zoomout"></i></span>--></div>
+                                </div>
+                            </div>
+                            <!--<div class="controls-pan">
+                                <span><i class="btn bg-danger fa fa-arrow-up js-image-up"></i></span>
+                                <span> <i class="btn bg-danger fa fa-arrow-left js-image-left"></i> <i class="btn bg-danger fa fa-arrow-right js-image-right"></i> </span>
+                                <span><i class="btn bg-danger fa fa-arrow-down js-image-down"></i></span>
+                            </div>
+                            <div class="controls-zoom">
+                                <span><i class="btn bg-danger fa fa-home js-image-reset"></i></span>
+                                <span><i class="btn bg-danger fa fa-plus js-image-zoomin"></i> </span>
+                                <span><i class="btn bg-danger fa fa-minus js-image-zoomout"></i></span>
+                            </div>--></div> <a ng-click="viewFromseat()" href="" class="transparency view-from-seat" ng-show="is_link_enabled == true"><span><i class="fa fa-camera fa-inverse"></i>&nbsp;{{'VIEW FROM SEAT'|translate}}</span></a> <a ng-click="backToseat()"
+                            href="" class="transparency view-from-seat" ng-show="!is_link_enabled"><span><i class="fa fa-camera fa-inverse"></i>&nbsp;{{'Back to Select your seat'|translate}}</span></a> </div>
+                    <venue-zone-svg-image entry="svg_image" label="zoom-svg"
+                        ng-if="svg_image" class="venue-zone-svg-image"></venue-zone-svg-image>
+                </div>
+                <div class="col-md-3 col-sm-4 no-pad"> <img ng-src="{{model.chooseSeat.Event[0].normal_image_name}}" class="center-block img-responsive" alt="[Image: Vareka-light]" title="Vareka-light" /> </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="booking-summary-block">
+                        <!--<div class="choose-seat-bg panel-body row">
+                            <h6>{{'PRICE'|translate}} ({{'ALL PRICES INCLUDE FEES'|translate}})</h6>
+                            <h6><b>{{'Select prices to filter seats'|translate}}</b></h6>
+                            <div ng-repeat="zone_price in zone_prices | orderBy: 'price'">
+                                <a href="" ng-click="zoneView(zone_price.zone_id)" id="{{zone_price.zone_id}}" class="text-black text-decoration-none"> <svg width="10" height="10"><circle r="4" cx="5" cy="5" style="stroke:{{zone_price.style}}; fill:transparent;"></circle></svg> {{formatCurrency(zone_price.price) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</a>
+                            </div>
+                            <div ng-show="zone_prices.length == 0">
+                                <p>{{'No seat available'|translate}}.</p>
+                            </div>
+                        </div>-->
+                        <!--<div class="well-sm"></div>-->
+                        <div class="clearfix no-border row choose-seats-block">
+                            <div class="rounded-corner1 clearfix">
+                                <div class="details-blk">
+                                    <h4 class="text-uppercase booking-heading">{{'booking summary' | translate}} </h4>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <h2 class="booking-details">PLATINUM 2- A8, A9</h2>
+                                            <p>The Illsionists - DXB - UAE</p>
+                                            <p>Wednesday, 16 September 2016</p>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <p class="price">1,299 x3 <a href=""><i class="fa fa-window-close" aria-hidden="true"></i>
+</a> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix col-md-12">
+                                    <div class="clearfix basket_content">
+                                        <div class="basket_row clearfix" id="basket_row_{{$index}}" ng-repeat="(key, value) in addedItems">
+                                            <div class="media-body clearfix row">
+                                                <div class="col-sm-7 nav"> <span class="list-group-item-heading">
+                                            <small class="clearfix"><strong class="h5 text-uppercase">{{value.data.zone_name}},&nbsp;{{'Row'|translate}}&nbsp;{{value.data.venue_zone_section_row_name}},&nbsp;{{value.data.seat_name}}</strong></small>
+
+                                                <small>{{value.data.venue_zone_section_name}} </small>
+
+                                            <small class="clearfix">{{value.data.event_start_date | moment:'dddd, DD MMM YYYY'}}</small>
+                                            <small class="clearfix">{{value.quantity}}x {{value.data.price.name}}</small>
+                                                   </span> </div>
+                                                <div class="col-sm-5 text-md-right no-pad"> <span class="small textb">{{formatCurrency(value.price) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</span> <a ng-click="removeAddedItem($event, key, value.price)" class="cursor-pointer"><i class="fa fa-window-close fa-fw text-danger"></i></a>                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="details">
+                                        <div class="totals">
+                                            <div class="row">
+                                                <div class="col-xs-8"> <span class="sub-total">{{'Sub Total'|translate}}</span> </div>
+                                                <div class="col-xs-4"><small><strong class="pull-right total-value">{{ formatCurrency(totalcost) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction }}</strong></small> </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <p class="standard-fee">{{'Standard Handlig fees'|translate}}</p>
+                                                <p>Dhs.5.00 Per Ticket </p>
+                                            </div>
+                                            <div class="col-xs-4"><small><strong class="pull-right">{{formatCurrency(((2/100)* totalcost)) |  currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</strong></small></div>
+                                        </div>
+                                        <div class="split-ups">
+                                            <div class="clearfix">
+                                                <div class="pull-left">
+                                                    <p class="grey-text">Booking Fees</p>
+                                                    <p class="grey-text">Serice Tax @ 14%</p>
+                                                    <p class="grey-text">Ticket Printing Fee</p>
+                                                    <p class="grey-text">Home Delivery Fee @ Dhs.20/Order </p>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <p class="grey-text">{{ formatCurrency(totalcost) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction }}</p>
+                                                    <p class="grey-text">{{ formatCurrency(totalcost) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction }}</p>
+                                                    <p class="grey-text">{{ formatCurrency(totalcost) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction }}</p>
+                                                    <p class="grey-text">{{ formatCurrency(totalcost) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction }}</p>
+                                                </div>
+                                            </div>
+                                        </div> <a class="break-dwn-hide" href="">Hide Service Fee Break Down*</a> </div>
+                                </div>
+                            </div>
+                            <div class="checkout-blk rounded-corner clearfix">
+                                <div class="clearfix"> <span class="pull-left no-mar">{{'Total Amount'|translate}}</span>
+                                    <p class="amt">{{formatCurrency(((2/100)* totalcost) + totalcost) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p>
+                                </div>
+                                <div class="text-center"> <a class="btn btn-danger text-uppercase textb btn-sm navbar-btn" href="" ng-click="addToBasket()">{{'Proceed to checkout'|translate}}</a> </div> <span class="left-curve"></span> <span class="right-curve"></span> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

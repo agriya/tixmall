@@ -1,0 +1,177 @@
+<div class="container-max">
+    <section id="banner-carousel" class="slider homepgslider">
+        <div ng-show="!sliderImageLoaded" class="text-center">
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <div class="well-lg hidden-xs"></div>
+            <div class="well-lg hidden-xs"></div>
+            <div class="well-lg hidden-xs"></div> <i class="fa fa-spinner fa-inverse fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <div class="well-lg hidden-xs"></div>
+            <div class="well-lg hidden-xs"></div>
+            <div class="well-lg hidden-xs"></div>
+        </div>
+        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <uib-slide ng-show="sliderImageLoaded" ng-repeat="sliderData in model.sliderData track by $index" index="$index"> <img ng-src="{{sliderData.image_name}}" class="img-responsive center-block">
+                <div class="carousel-caption text-shadow">
+                    <div class="hbannertext hometopbanner">
+                        <div class="main-banner text-left fa-inverse"> <a href="#!/venue/{{sliderData.venue.id}}/{{sliderData.venue.slug}}" class="text-decoration-none hvenueplace"> <span>{{sliderData.venue.name}}</span></a>
+                            <h1 class="text-inverse list-group-item-heading"> <a ng-if="sliderData.event_schedule.length == 1" class="text-decoration-none" href="#!/event/{{sliderData.id}}/{{sliderData.slug}}">{{sliderData.name}}</a> <a ng-if="sliderData.event_schedule.length > 1" class="text-decoration-none"
+                                    href="#!/eventschedule/{{sliderData.id}}/{{sliderData.slug}}">{{sliderData.name}}</a> </h1>
+                            <ul class="list-unstyled bbannerdesc">
+                                <li> <span class="margin-left-5">{{sliderData.category.name}} </span></li>
+                                <li> <a ng-if="sliderData.event_schedule.length == 1" href="#!/event/{{sliderData.id}}/{{sliderData.slug}}" class="text-decoration-none">
+                                        <span class="margin-left-5">{{sliderData.event_schedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{sliderData.event_schedule[0].end_date |moment:'dddd, DD.MMM.YY'}} </span></a> <a ng-if="sliderData.event_schedule.length > 1"
+                                        href="#!/eventschedule/{{sliderData.id}}/{{sliderData.slug}}" class="text-decoration-none">
+                                        <span class="margin-left-5">{{sliderData.event_schedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{sliderData.event_schedule[0].end_date |moment:'dddd, DD.MMM.YY'}} </span></a> </li>
+                                <li><span class="margin-left-5">{{sliderData.venue.address1}}</span> </li>
+                                <li>
+                                    <p class="list-group-item-heading">&nbsp; {{sliderData.min_price+'-'+sliderData.max_price | pricedisplayrange}}</p>
+                                </li>
+                                <!--<li ng-show="sliderData.is_free_event !== true"> <span><img src="../images/banner-icon-3-dollar.png" class="fa-fw"> </span> <span class="margin-left-5">{{'Tickets Starting From AED 250'|translate}}</span> </li>-->
+                            </ul> <br> <a ng-if="sliderData.event_schedule.length == 1" class="btn btn-danger btn-lg no-border-rad view-more-btn" href="#!/event/{{sliderData.id}}/{{sliderData.slug}}">{{'Buy Now'|translate}}</a><a ng-if="sliderData.event_schedule.length > 1"
+                                class="btn btn-danger btn-lg no-border-rad view-more-btn" href="#!/eventschedule/{{sliderData.id}}/{{sliderData.slug}}">{{'Buy Now'|translate}}</a> </div>
+                    </div>
+                    <div class="hbannercbg"></div>
+                </div>
+            </uib-slide>
+        </uib-carousel>
+    </section>
+</div>
+<!--Banner section end-->
+<div class="space-top-0">
+    <div class="hcagegoryblock clearfix">
+        <div class="customcontainer">
+            <div class="hcateginner">
+                <ul class="list-unstyled">
+                    <li ng-click="getContent(category.id)" ng-class="(category.id == current_category) ? 'active':''" ng-repeat="category in model.categories | limitTo:7 track by $index"><a href="">{{category.name}}</a></li>
+                </ul>
+                <!--<div class="hfilterright"> <span ng-click="homefilter = !homefilter;">Filter by</span> </div>--></div>
+        </div>
+    </div>
+    <!-- <div class="hfilterblk" ng-show="homefilter === true">
+        <div class="customcontainer">
+            <form ng-submit="submitHomeFilters();">
+                <div class="filterinput"> <label>By Heading</label> <input type="text" ng-model="HomeFilter.q" /> </div>
+                <div class="filterdate"> <label>By Date</label> <input type="text" uib-datepicker-popup=yyyy-MM-dd ng-model="date" is-open="opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-focus="open1()" /> <span class="input-group-btn">
+          </span> </div>
+                <div class="filterselect"> <label>By City</label> <select name="venue" id="venue" class="form-control" ng-model="HomeFilter.venue_id" ng-change="eventscontroller.venueChange(eventscontroller.venue_id)" ng-options="venue.id as venue.name for  venue in venuesLists">
+                          <option value="">Choose a venue</option>
+                    </select> </div>
+                <div class="filterselect"> <label>By Timing</label> <select name="series" id="series" ng-model="HomeFilter.series_id" ng-change="eventscontroller.seriesChange(eventscontroller.series_id)" ng-options="series.id as series.name for series in seriesLists">
+                          <option value="">Choose a series</option>
+                    </select> </div>
+                <div class=""> <label></label> <button type="submit">Search</button> </div>
+            </form>
+        </div>
+    </div>--></div>
+<div class="listcarlblk whitebg clearfix">
+    <div ng-show="!tabContentLoaded" class="text-center">
+        <div class="well-lg"></div>
+        <div class="well-lg"></div>
+        <div class="well-lg hiddex-xs"></div>
+        <div class="well-lg hidden-xs"></div> <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
+        <div class="well-lg"></div>
+        <div class="well-lg"></div>
+        <div class="well-lg hidden-xs"></div>
+        <div class="well-lg hidden-xs"></div>
+    </div>
+    <data-owl-carousel class="list-unstyled owl-carousel owl-theme" ng-if="owl_corousel_event && tabContentLoaded == true">
+        <div owl-carousel-item="" class=" item ng-scope" ng-repeat="event in owl_corousel_event">
+            <div class="hmainlisting">
+                <div class="customcontainer">
+                    <div class="hlistouter">
+                        <div class="hlistingblk" ng-repeat="home_firstblk_event in event.home_firstblk_events">
+                            <div class="slist" ng-repeat="block1 in home_firstblk_event">
+                                <a href="#!/event/{{block1.id}}/{{block1.slug}}">
+                                    <div class="pr"><img ng-src="{{block1.image_name}}" />
+                                        <div class="hlistdetails">
+                                            <h2 class="text-uppercase">{{block1.name}}</h2>
+                                            <div class="hvenuedtls clearfix">
+                                                <div class="pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i> <span>{{block1.event_schedule[0].start_date |moment:'DD MMM YY'}} - {{block1.event_schedule[0].end_date |moment:'DD MMM YY'}}</span> </div>
+                                                <div class="pull-right">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{block1.venue.name}}</span> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hlistingblk" ng-repeat="home_secondblk_event in event.home_secondblk_events" ng-if="home_secondblk_event.length > 2">
+                            <div class="slist" ng-repeat="block1 in home_secondblk_event">
+                                <a href="#!/event/{{block1.id}}/{{block1.slug}}">
+                                    <div class="pr"><img ng-src="{{block1.image_name}}" />
+                                        <div class="hlistdetails">
+                                            <h2 class="text-uppercase">{{block1.name}}</h2>
+                                            <div class="hvenuedtls clearfix">
+                                                <div class="pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i> <span>{{block1.event_schedule[0].start_date |moment:'DD MMM YY'}} - {{block1.event_schedule[0].end_date |moment:'DD MMM YY'}}</span> </div>
+                                                <div class="pull-right">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{block1.venue.name}}</span> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </data-owl-carousel>
+    <div class="col-md-12 mt25 mytest" ng-show="tabContentLoaded && owl_corousel_event.length === 0">
+        <div class="text-center">
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+            <h3 class="text-danger">{{'No events found' | translate}}.</h3>
+            <div class="well-lg"></div>
+            <div class="well-lg"></div>
+        </div>
+    </div>
+</div>
+<div class="homehappendingblk">
+    <div class="customcontainer">
+        <div class="happenfilterblk">
+            <h3 class="happendinghd text-uppercase">Happending Now</h3>
+            <ul class="list-unstyled happending_category">
+                <li><a href="#">Venues</a></li>
+                <li><a href="#">Latest Events</a></li>
+                <!--                <li><a href="#">Past Events</a></li>
+-->
+                <li><a href="#">Calendar</a></li>
+            </ul>
+        </div>
+        <div class="hhappeninner">
+            <div class="happenleft">
+                <div class="happenleftinner">
+                    <div class="hhappenmblk">
+                        <h3 class="htitleblk">VENUES</h3>
+                        <venues-lists type="venue"></venues-lists>
+                    </div>
+                    <venues-lists type="eventAndVenue"></venues-lists>
+                </div>
+            </div>
+            <div class="calendar-block home-view-calendar">
+                <h3 class="htitleblk">Calendar</h3>
+                <calendar type="home"></calendar>
+            </div>
+        </div>
+    </div> <br>
+    <div class="customcontainer">
+        <div class="happenfilterblk">
+            <h3 class="happendinghd text-uppercase">LATEST NEWS</h3>
+        </div>
+        <div class="hhappeninner">
+            <div class="happenleftinner">
+                <div class="hhappenmblk">
+                    <latest-news></latest-news>
+                </div>
+            </div>
+        </div>
+        <div> </div>
+    </div>
+</div>

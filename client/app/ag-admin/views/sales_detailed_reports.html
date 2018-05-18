@@ -1,0 +1,49 @@
+<div id="container" class="sales-report">
+    <reports-filter callback="sales_detailed_reports.refreshFilters(filter)" type="sales_detail"></reports-filter>
+    <div class="row">
+        <div class="stats">
+            <div class="col-xs-12">
+                <div class="col-sm-6 text-center">
+                    <div class="bg-info well-sm">
+                        <div class="navbar-btn"></div>
+                        <h2 class="fa-inverse" 2>2,422</h2>
+                        <h6 class="fa-inverse">TOTAL QUANTITY</h6>
+                        <div class="navbar-btn"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <div class="bg-warning well-sm">
+                        <div class="navbar-btn"></div>
+                        <h2 class="fa-inverse">148,164.00 TL</h2>
+                        <h6 class="fa-inverse">TOTAL REVENUE</h6>
+                        <div class="navbar-btn"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well-sm xs-hidden"></div>
+    <div class="row">
+        <div class="col-xs-12 table-responsive sales-report-filter">
+            <h4 class="sep-border text-uppercase">DETAILED SALES REPORTS</h4>
+            <table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Event - Ticket Type </th>
+                        <th>Day</th>
+                        <th width="110">Sales Quantity</th>
+                        <th width="70">Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key,value)  in sales_detailed_reports.report_details.price_type" ng-if="value.price_type_id !== null">
+                        <td>{{value.price_type_name}}</td>
+                        <td>{{$state.params.start_date|date}}</td>
+                        <td class="text-center">{{value.sold_quantity}}</td>
+                        <td class="text-center">{{value.revenue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

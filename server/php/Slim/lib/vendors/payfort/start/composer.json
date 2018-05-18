@@ -1,0 +1,23 @@
+{
+  "name": "payfort/start",
+  "description": "Payfort Start makes accepting online payments in the Middle East a piece of cake",
+  "authors": [
+      {
+        "name": "Yazin",
+        "email": "yazin@payfort.com",
+        "homepage": "https://start.payfort.com/"
+      }
+    ],
+  "keywords": ["payfort", "middle east", "payments", "online payments"],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "4.2.*"
+  },
+  "lib-curl": "*",
+  "autoload": {
+    "psr-0": {
+      "Start": "src/",
+      "Start\\Test": "tests/"
+    }
+  }
+}

@@ -1,0 +1,120 @@
+<div class="section pr">
+    <div class="container">
+        <div class="alert alert-danger alert-blk js-choose-seat" style="display:none;"> <strong>PLEASE CHOOSE YOUR TICKETS!</strong>
+            <!--<a href="javascript:void(0);" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times-circle" aria-hidden="true"></i>
+        </a>--></div>
+        <div class="row pspace9"> <a href="javascript:void(0);" data-toggle="tooltip" title="{{zone_name}}">{{zone_name}}</a>
+            <div class="venue-image venue-image-view">
+                <div class="venue-image-level  fa-inverse">
+                    <div class="clearfix text-center navbar-btn">
+                        <ul class="breadcrumb list-group-item-text no-border-rad">
+                            <li class="active"><strong>{{'CHOOSE TICKETS'|translate}}</strong> </li>
+                            <li> <span>{{'YOUR BASKET'|translate}}</span> </li>
+                            <li class=""> <span>{{'DELIVERY METHOD'|translate}}</span> </li>
+                            <li class=""> <span>{{'PAYMENT'|translate}}</span> </li>
+                            <li class=""> <span>{{'CONFIRMATION'|translate}}</span> </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <div class="col-sm-3"> <a href="#!/event/{{model.bookings.Event[0].id}}/{{model.bookings.Event[0].slug}}"> <img ng-src="{{model.bookings.Event[0].normal_image_name}}" class="center-block img-responsive" alt="[Image: Vareka-light]" title="Vareka-light" /></a>                                </div>
+                            <div class="col-sm-9 fa-inverse"> <span class="font16">{{model.bookings.Event[0].venue.name}}</span>
+                                <a href="#!/event/{{model.bookings.Event[0].id}}/{{model.bookings.Event[0].slug}}">
+                                    <h3 class="list-group-item-heading"> <b>{{model.bookings.Event[0].name}}</b> </h3>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li class="list-group-item-heading"> <span>{{model.bookings.Event[0].category.name}} </span></li>
+                                    <li> <span class="pull-left">
+                                                    <a href="#!/event/{{model.bookings.Event[0].id}}/{{model.bookings.Event[0].slug}}"><img class="fa-fw" src="../images/banner-icon-1-calendar.png"></a>
+                                                </span>
+                                        <p class="list-group-item-heading">&nbsp; {{model.bookings.EventSchedule[0].start_date |moment:'dddd, DD.MMM.YY'}} - {{model.bookings.EventSchedule[0].end_date |moment:'dddd, DD.MMM.YY'}}</p>
+                                    </li>
+                                    <li> <span class="pull-left">
+                                                    <img src="../images/banner-icon-2-map.png" class="fa-fw" alt="[Image: Banner-icon-map]" title="Banner-icon-map">
+                                                </span>
+                                        <p class="list-group-item-heading">&nbsp; {{model.bookings.Event[0].venue.address1}}</p>
+                                    </li>
+                                    <li> <span class="pull-left">
+                                                    <img src="../images/banner-icon-3-dollar.png" class="fa-fw" alt="[Image: Banner-icon-dollar]" title="Banner-icon-dollar">
+                                                </span>
+                                        <p class="list-group-item-heading">&nbsp; {{model.bookings.Event[0].min_price+'-'+model.bookings.Event[0].max_price | pricedisplayrange}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<h3 class="list-group-item-text text-uppercase">{{model.bookings.Event[0].name}}</h3> <span><span class="pull-left"><a href="#!/eventschedule/{{model.bookings.Event[0].id}}/{{model.bookings.Event[0].slug}}"><img class="fa-fw" src="../images/banner-icon-1-calendar.png"></a>&nbsp;</span>                    <strong><small>{{ startdate.start_date | moment:'dddd, DD MMM YYYY hh:mm A'}}</small></strong></span>-->
+                    <div class="well-sm"></div>
+                </div>
+                <div class="bg-info well-sm mb0 no-border-rad" id="choose_ticket_container" ng-if="model.bookings[0].is_seat_map == 1">
+                    <div class="clearfix text-xs-center text-md-left text-sm-left text-lg-left mbot20 select-area">
+                        <div class="col-sm-6">
+                            <h5 class="ng-binding">{{'CLICK ON PHOTO TO PICK AREA'|translate}}</h5>
+                        </div>
+                        <div class="col-sm-6 text-sm-right"><a href="#!/booking/{{model.bookings.Event[0].id}}/bestavailable/{{model.bookings[0].id}}/{{startdate.id}}" class="btn btn-danger btn-sm ng-binding">{{'CHOOSE BEST AVAILABLE SEATS'|translate}} </a></div>
+                    </div>
+                    <div class="col-md-12 text-center loader-image">
+                        <div class="loader-style"><img src="../images/loader.gif" alt="Loader" title="Loader" /></div>
+                    </div>
+                    <div class="venue-images"> <img class="venue-image-background" ng-src="{{image_name}}" class="img-responsive" style="width:100%; height:auto;" />
+                        <svg-image entry="svg_image" label="zones" ng-if="svg_image"></svg-image>
+                    </div>
+                    <div class="navbar-btn"></div> <span class="well-sm">{{'If you are a user with a visual impairment please use the “Let us choose the best available seats” option'|translate}}.</span>
+                    <div class="navbar-btn"></div>
+                </div>
+                <!-- choose seats by date without zone start -->
+                <div class="fa-inverse" ng-if="model.bookings[0].is_seat_map == 0">
+                    <div id="choose_date" class="form-alter">
+                        <!--<h3 class="text-uppercase">{{'Choose date'|translate}}</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3 col-md-3 col-xs-6"> <select class="form-control width-auto" ng-model="scheduled_year" ng-change="changeGroupedByYear(scheduled_year)">
+                                    <option ng-repeat="(key, value) in groupedByMonthAndYear" value="{{value[0].start_date}}">{{key | moment:'MMM YYYY'}}</option>
+                                </select> </div>
+                                <div class="col-sm-3 col-md-3 col-xs-6"> <select class="form-control width-auto" ng-model="scheduled_date" ng-change="changeGroupedByDate(scheduled_date)">
+                                    <option ng-repeat="(key, value) in groupedByDate" value="{{value.start_date}}">{{value.start_date | moment:'dddd DD'}}</option>
+                                </select> </div>
+                            </div>
+                        </div>
+                        <h3 class="text-uppercase">{{'Choose time'|translate}}</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3 col-md-3"> <select class="form-control width-auto" ng-model="scheduled_time" ng-change="changeGroupedByTime(scheduled_time)">
+                                    <option ng-repeat="(key, value) in groupedByTime[scheduled_date]" value="{{value.start_date}}">{{value.start_date | moment:'hh:mm A'}}</option>
+                                </select> </div>
+                            </div>
+                        </div>-->
+                        <h3>{{'CHOOSE YOUR TICKETS'|translate}}</h3>
+                        <div class="row">
+                            <div class="form-group" ng-repeat="event_price in model.bookings[0].event_venue_zone[0].event_zone_prices">
+                                <div class="form-inline col-xs-12"> <label class="control-label col-md-2 nav">{{event_price.price_type.name}}</label> <select class="form-control width-auto col-md-10" ng-model="model.event_price_select[event_price.id]" ng-change="model.addPriceDetails(event_price.price_type, event_price.price, model.event_price_select[event_price.id])">
+                                        <option value="">{{'Select tickets' | translate}}
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            </select> X {{formatCurrency(event_price.price) * 1 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}
+                                    <my-modal body="<p><strong>Tickets:</strong> &nbsp; {{formatCurrency(event_price.price) | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p><p><strong>Transaction Processing Fee:</strong> &nbsp; {{0 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p><p><strong>Payment Handling Fee:</strong> &nbsp; {{0 | currency : selectedCurrency.currency_symbol : GeneralConfig.fraction}}</p<br><p>All fees are estimated until tickets are released for sale. Group bookings of more than 12 tickets and bookings for entire boxes, cannot be made online. If you would like to make a group booking or book an entire box please phone the box office on 0845 401 5040 from 9am on Saturday 7 May.</p>"
+                                        name="{{model.bookings.Event[0].name}}"><span class="text-danger">{{'Including fees'|translate}}</span></my-modal>
+                                </div>
+                                <div class="well-sm clearfix"></div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div><a class="btn btn-danger btn-sm text-uppercase" ng-click="model.checkAvailability()">{{'Add to Basket'|translate}}</a> </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose seats by date without zone end -->
+            </div>
+        </div>
+    </div>

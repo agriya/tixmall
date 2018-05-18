@@ -1,0 +1,52 @@
+<div id="container" class="sales-report">
+    <reports-filter callback="visitors_reports.refreshFilters(filter)" type="visitors"></reports-filter>
+    <div class="col-xs-12">
+        <h4 class="sep-border text-uppercase">Visitors Reports</h4>
+        <div class="row">
+            <div class="col-sm-8">
+                <table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th class="centered">Member</th>
+                            <th class="centered">Visitor</th>
+                            <th width="100">Percentage</th>
+                        </tr>
+                        </head>
+                        <tbody>
+                            <tr ng-repeat="visitor in visitors_reports.report_details.datewise.member">
+                                <td>{{visitor.created_at}}</td>
+                                <td class="centered">{{visitor.count}}</td>
+                                <td class="centered">83</td>
+                                <td>
+                                    <div class="progress" title="%0">
+                                        <div class="bar" style="width: 0%;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4 text-center">
+                <h4 class="sep-border text-uppercase">VISITOR TYPES</h4>
+                <table id="totalVisitorReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Member</th>
+                            <th>Visitor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td>{{visitors_reports.report_details.overall.visitByMember}}</td>
+                            <td>{{visitors_reports.report_details.overall.visitByVisitor}}</td>
+                        </tr>
+                    </tbody>
+                </table> <br />
+                <h4 class="header">TOTAL VISITS</h4>
+                <h1 class="">{{visitors_reports.report_details.overall.total_visit}}</h1>
+            </div>
+        </div>
+    </div>

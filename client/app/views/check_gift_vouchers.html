@@ -1,0 +1,34 @@
+<div class="section fa-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 navbar-btn">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="mb25 text-uppercase">{{'Gift Certificates'|translate}}</h2>
+                    </div>
+                    <div class="col-sm-6 text-sm-right">
+                        <div class="well-sm"></div> <a class="btn btn-danger btn-sm text-uppercase" href="#!/giftcertificates/purchase">{{'Purchase a gift certificate'|translate}}</a> </div>
+                    <div class="well-sm visible-xs"></div>
+                    <div class="clearfix"></div>
+                </div>
+                <p>{{'Check the balance of your gift certificate here, or click "Purchase" to buy a new gift certificate for yourself or loved ones.'|translate}}</p>
+                <form class="form-horizontal form-alter">
+                    <div class="form-group">
+                        <div class="col-sm-3 none-pad"> <label class="control-label">{{'Your Gift Certificate code'|translate}}<span class="text-danger">&nbsp*</span></label> </div>
+                        <div class="col-sm-9 none-pad">
+                            <div class="input-group col-sm-6 col-md-4"> <input type="text" class="form-control input-sm" ng-model="chkgift.coupon_code"> <span class="input-group-btn input-group-sm">
+                                        <a class="btn btn-danger btn-sm text-uppercase"  ng-click="chkgift.check(chkgift.coupon_code)">{{'Check'|translate}}</a>
+                                    </span> </div>
+                        </div>
+                        <div ng-show="chkgift.showCouponDetails" class="col-sm-9 none-pad">
+                            <div class="well-sm"></div>
+                            <h4 class="text-success">{{'Your gift voucher code id valid'}}</h4> <span>{{'Available amount:'|translate}}&nbsp;{{chkgift.coupon_details[0].avaliable_amount}}</span> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{
+	"name": "Online Food Ordering",
+	"description": "Online Food Ordering",
+	"keywords": [
+		"Online Food Ordering",
+		"slim"
+	],
+	"type": "project",
+	"minimum-stability": "RC",
+	"require": {
+		"slim/slim": "3.*",
+		"illuminate/database": "*",
+		"illuminate/pagination": "^5.2",
+		"illuminate/validation": "*",
+		"swiftmailer/swiftmailer": "@stable",
+		"illuminate/translation": "*"
+	},
+	 "autoload": {
+		"psr-4": {
+			"Models\\": "lib/Models/"
+		}
+	}
+
+}

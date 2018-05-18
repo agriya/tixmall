@@ -1,0 +1,52 @@
+<div id="container" class="sales-report">
+    <reports-filter type="capacity" callback="capacity_reports.refreshFilters(filter)"></reports-filter>
+    <div class="col-xs-12">
+        <div class="alert alert-info row" ng-show="capacity_reports.report_details.length == 0"> <strong>Warning!</strong> <br> Please <strong>select an event</strong> to view its capacity report. Click here to select event. </div>
+        <div class="report_details" ng-show="capacity_reports.report_details.length > 0">
+            <h4 class="sep-border">Capacity Reports</h4>
+            <div class="table-responsive" ng-repeat="capacity_report in capacity_reports.report_details">
+                <h4 class="sep-border">{{capacity_report.event_schedule.start_date | date}}</h4>
+                <table border="0" cellpadding="0" cellspacing="0" class="table" ng-repeat="event_zone in capacity_report.event_zones" ng-if="event_zone.event_zone_id !== null">
+                    <thead>
+                        <tr>
+                            <th>Block / Area</th>
+                            <th class="text-center">Capacity</th>
+                            <th class="text-center">Sold</th>
+                            <th class="text-center">Remaining</th>
+                            <th class="text-center">Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{event_zone.event_zone.name}}</td>
+                            <td class="text-center">{{event_zone.event_zone.available_count}}</td>
+                            <td class="text-center">{{event_zone.ticket_sold}}</td>
+                            <td class="text-center">{{event_zone.event_zone.available_count - event_zone.ticket_sold}}</td>
+                            <td>
+                                <uib-progressbar type="info" class="progress-striped active" value="((event_zone.ticket_sold/event_zone.event_zone.available_count)*100)"></uib-progressbar>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="indent-one">
+                                <table border="0" cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Ticket Type</th>
+                                            <th class="text-center">Sold</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="price_type in event_zone.price_types">
+                                            <td>{{price_type.price_type.name}}</td>
+                                            <td class="text-center">{{price_type.ticket_sold}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

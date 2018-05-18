@@ -1,0 +1,45 @@
+<!--<div ng-repeat="event_schedule in event_schedules" class="time_container row">
+    <div class="ng-admin-field-start_date ng-admin-type-datetime col-sm-10 col-md-8 col-lg-7">
+        <a class="btn btn-danger pull-right navbar-btn" href="javascript:void(0)" ng-click="deleteEventSchedule(event_schedule.id, $index)"> <span class="glyphicon glyphicon-minus-sign">&nbsp;Delete</span> </a>
+        <div class="datetime_widget"> <label>Start date: &nbsp;</label>
+            <p class="input-group"> <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="event_schedule.start_date" is-open="event_schedules[$index]['start_date_open']" close-on-date-selection="true" value="{{event_schedule.start_date}}" />
+                <span
+                    class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start_date_open', $index)"><i class="fa fa-calendar"></i></button> </span>
+            </p>
+        </div>
+        <div class="datetime_widget"> <label>End date: &nbsp;</label>
+            <p class="input-group"> <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="event_schedule.end_date" is-open="event_schedules[$index]['end_date_open']" value="{{event_schedule.end_date}}" /> <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'end_date_open', $index)"><i class="fa fa-calendar"></i></button>
+              </span> </p>
+        </div>
+        <hr ng-show="!$last"> </div>
+</div>
+<div class="clearfix"></div>
+<div class="">
+    <a class="btn btn-success" href="javascript:void(0)" ng-click="addEventSchedule()"> <span class="glyphicon glyphicon-plus-sign">&nbsp;Add new</span> </a>
+    <div class="well-sm"></div>
+</div>-->
+<table class="table table-bordered">
+    <thead class="thead-inverse">
+        <tr>
+            <th>#</th>
+            <th class="text-center">Start Date</th>
+            <th class="text-center">End Date</th>
+            <th class="text-center"> <a class="btn btn-success" href="javascript:void(0)" ng-click="addEventSchedule()"> <span class="glyphicon glyphicon-plus-sign"></span> </a> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="event_schedule in event_schedules">
+            <td>{{event_schedules.indexOf(event_schedule) + 1}}</td>
+            <td>
+                <p class="input-group"> <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="event_schedule.start_date" is-open="event_schedules[$index]['start_date_open']" close-on-date-selection="true" value="{{event_schedule.start_date}}" />                    <span class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'start_date_open', $index)"><i class="fa fa-calendar"></i></button> </span> </p>
+            </td>
+            <td>
+                <p class="input-group"> <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="event_schedule.end_date" is-open="event_schedules[$index]['end_date_open']" value="{{event_schedule.end_date}}" /> <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'end_date_open', $index)"><i class="fa fa-calendar"></i></button>
+                  </span> </p>
+            </td>
+            <td> <a class="btn btn-danger pull-right navbar-btn" href="javascript:void(0)" ng-click="deleteEventSchedule(event_schedule.id, $index)"> <span class="glyphicon glyphicon-minus-sign"></span> </a> </td>
+        </tr>
+    </tbody>
+</table>

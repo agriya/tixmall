@@ -1,0 +1,91 @@
+<div id="container" class="sales-report">
+    <reports-filter callback="financial_reports.refreshFilters(filter)" type="financial"></reports-filter>
+    <div class="col-xs-12">
+        <h4 class="text-uppercase sep-border">Financial Reports</h4>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <h4 class="text-uppercase">Channels</h4>
+                <table id="saleChannelReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="sales_channel in financial_reports.group_sales_channels">{{sales_channel.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td ng-repeat="sales_channel in financial_reports.group_sales_channels">{{sales_channel.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h4 class="text-uppercase">Payment types</h4>
+                <table id="orderTypeReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>{{financial_reports.group_payment_types[0].name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td>{{financial_reports.group_payment_types[0].count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <div class="well-sm"></div>
+                <h4 class="text-uppercase">TOTAL QUANTITY</h4>
+                <h1 class="sep-border">{{financial_reports.report_details.overall.total_sales}}</h1>
+            </div>
+            <div class="col-sm-6 text-center">
+                <div class="well-sm"></div>
+                <h4 class="text-uppercase">TOTAL REVENUE(TL)</h4>
+                <h1 class="sep-border">{{financial_reports.report_details.overall.total_revenue}}TL</h1>
+            </div>
+        </div>
+        <div class="well-sm"></div>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <h4 class="text-uppercase">DELIVERY TYPES</h4>
+                <table id="deliveryTypeReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="delivery_method in financial_reports.group_delivery_methods">{{delivery_method.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td ng-repeat="delivery_method in financial_reports.group_delivery_methods">{{delivery_method.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h4 class="text-uppercase">SALES WITH PAYMENT PLANS</h4>
+                <table id="installmentReport" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>No Payment Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td>2422</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
