@@ -1,57 +1,56 @@
 # Tixmall
 
-## Slim: 3.* & Angular Base Script
+Tixmall is an open source Event Booking Solutions that is capable to quickly set up, activate and optimize an event
+management marketplace. It is written in AngularJS with REST API for high performance in mind.
 
-## Requirements:
+> This is project is part of Agriya Open Source efforts. Tixmall was originally a paid script and was selling around 10000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
-* Nginx 
-* PHP >= 5.5.9
-* Enable extensions in **php.ini** file(OpenSSL PHP Extension, PDO PHP Extension, Mbstring PHP Extension, curl)
+![tixbox_banner](https://user-images.githubusercontent.com/4700341/48555231-96919900-e906-11e8-91c1-47188e1e5686.png)
+![tixbox_event](https://user-images.githubusercontent.com/4700341/48555232-96919900-e906-11e8-850b-096fd894d29c.png)
+
+## Support
+
+Tixmall is an open source project. Full commercial support (commercial license, customization, training, etc) are available through [Tixmall platform support](https://www.agriya.com/solutions/event-booking-solution)
+
+Theming partner [CSSilize for design and HTML conversions](http://cssilize.com/)
+
+## Getting Started
+
+### Prerequisites
+
+#### For deployment
+
+* PostgreSQL
+* PHP >= 5.5.9 with OpenSSL, PDO, Mbstring and cURL extensions
+* Nginx (preferred) or Apache
+
+#### For building (build tools)
+
 * Nodejs
 * Composer
 * Bower
 * Grunt
 
+### Setup
 
-## Server Side:
-### Composer Updation:
+* PHP dependencies are handled through `composer` (Refer `/server/php/Slim/`)
+* JavaScript dependencies are handled through `bower` (Refer `/client/`)
+* Needs writable permission for `/tmp/` and `/media/` folders found within project path
+* Build tasks are handled through `grunt`
+* Database schema `/sql/tixmall.sql`
 
-* To Update the Composer, please run the below command in following path `/Tixmall/server/php/Slim`.  
+### Contributing
 
-        composer update
-    
-* The above Updation doesn't work to you, need to install Composer, please refer this link **https://getcomposer.org/**  for "**How to install Composer**".
+Our approach is similar to Magento. If anything is not clear, please [contact us](https://www.agriya.com/contact).
 
-## Import db: 
+All Submissions you make to Tixmall through GitHub are subject to the following terms and conditions:
 
-1. Tixmall/sql/tixmall.sql
-
-
-## Front Side:
-
-* You need to install nodejs, bower, grunt.
-
-* Go to "/Tixmall/client" path in command prompt.
-
-* Run the below command, the bower used to download and installed all front-end development libraries.
-
-        bower install
-
-* The npm used to install the all dependencies in the local node_modules folder. [Click here](http://git8.ahsan.in/root/LaravelBase/blob/master/trunk/lumen/docs/Npm.md) for more npm details.
-
-        npm install    
+* You grant Agriya a perpetual, worldwide, non-exclusive, no charge, royalty free, irrevocable license under your applicable copyrights and patents to reproduce, prepare derivative works of, display, publicly perform, sublicense and distribute any feedback, ideas, code, or other information ("Submission") you submit through GitHub.
+* Your Submission is an original work of authorship and you are the owner or are legally entitled to grant the license stated above.
 
 
-## Default folder create and give permission 
+### License
 
-        /tmp
-        /media
+Copyright (c) 2014-2018 [Agriya](https://www.agriya.com/).
 
-# upload to server
-
-* need to create json, "**/Tixmall/client/builds/XXX.json**" [already dev.json available, take one copy and update server & db details]
-* If modify the files in local, you should run the below command for further updation.  
-  
-  cd "/Tixmall/client/"
-
-        grunt build:xxx      
+Dual License (OSL 3.0 & [Commercial License](https://www.agriya.com/contact))
